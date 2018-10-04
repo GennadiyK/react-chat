@@ -7,7 +7,9 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
-import SimpleBottomNavigation from './BottomNavigation'
+import SimpleBottomNavigation from './components/BottomNavigation'
+import Paper from '@material-ui/core/Paper';
+import FolderList from "./components/FolderList";
 
 const styles = theme => ({
   root: {
@@ -22,24 +24,31 @@ const styles = theme => ({
     width: '100%',
   },
   appBar: {
-    width: `calc(100% - 240px)`,
+    width: `calc(100% - 320px)`,
   },
   'appBar-left': {
-    marginLeft: '240px',
+    marginLeft: '320px',
   },
   'appBar-right': {
-    marginRight: '240px',
+    marginRight: '320px',
   },
   drawerPaper: {
     position: 'relative',
-    width: '240px',
+    width: '320px',
   },
   toolbar: theme.mixins.toolbar,
   content: {
+    display: 'flex',
     flexGrow: 1,
     backgroundColor: theme.palette.background.default,
     padding: theme.spacing.unit * 3,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
+  paper: {
+    padding: '24px'
+  }
+
 });
 
 class PermanentDrawer extends React.Component {
@@ -79,14 +88,22 @@ class PermanentDrawer extends React.Component {
           >
             <div className={classes.toolbar} />
 
-            <List>1</List>
-
-            <List>2</List>
+            <FolderList/>
             <SimpleBottomNavigation/>
           </Drawer>
           <main className={classes.content}>
             <div className={classes.toolbar} />
-            <Typography>{'You think water moves fast? You should see ice.'}</Typography>
+            <Paper className={classes.paper} elevation={1}>
+              <Typography variant="display1" component="h3" gutterBottom={true}>
+                Start messaging…
+              </Typography>
+              <Typography component="p" gutterBottom={true}>
+                Use <strong>Global</strong> to explore communities around here.
+              </Typography>
+              <Typography component="p" gutterBottom={true}>
+                Use <strong>Recents</strong> to see your recent conversations.
+              </Typography>
+            </Paper>
           </main>
         </div>
       </div>
