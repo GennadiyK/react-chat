@@ -5,11 +5,11 @@ import { withStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import SimpleBottomNavigation from './components/BottomNavigation'
 import Paper from '@material-ui/core/Paper';
-import FolderList from "./components/FolderList";
+import SelectList from "./components/SelectList";
+import SearchField from "./components/SearchField";
 
 const styles = theme => ({
   root: {
@@ -26,6 +26,10 @@ const styles = theme => ({
   appBar: {
     width: `calc(100% - 320px)`,
   },
+  chatList: {
+    flexGrow:1,
+    overflow: 'auto',
+  },
   'appBar-left': {
     marginLeft: '320px',
   },
@@ -33,10 +37,17 @@ const styles = theme => ({
     marginRight: '320px',
   },
   drawerPaper: {
+    display: 'flex',
+    flexDirection: 'column',
     position: 'relative',
+    overflow: 'hidden',
     width: '320px',
   },
-  toolbar: theme.mixins.toolbar,
+  asideToolbar: {
+    borderBottom: '1px solid  rgba(0, 0, 0, 0.12)',
+    paddingLeft: '24px',
+    paddingRight: '24px',
+  },
   content: {
     display: 'flex',
     flexGrow: 1,
@@ -56,11 +67,6 @@ class PermanentDrawer extends React.Component {
     anchor: 'left',
   };
 
-  handleChange = event => {
-    this.setState({
-      anchor: event.target.value,
-    });
-  };
 
   render() {
     const { classes } = this.props;
@@ -86,13 +92,13 @@ class PermanentDrawer extends React.Component {
             }}
             anchor={anchor}
           >
-            <div className={classes.toolbar} />
-
-            <FolderList/>
+            <Toolbar className={classes.asideToolbar}>
+              <SearchField/>
+            </Toolbar>
+            <SelectList/>
             <SimpleBottomNavigation/>
           </Drawer>
           <main className={classes.content}>
-            <div className={classes.toolbar} />
             <Paper className={classes.paper} elevation={1}>
               <Typography variant="display1" component="h3" gutterBottom={true}>
                 Start messaging…
