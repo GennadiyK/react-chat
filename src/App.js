@@ -10,6 +10,7 @@ import SimpleBottomNavigation from './components/BottomNavigation'
 import Paper from '@material-ui/core/Paper';
 import SelectList from "./components/SelectList";
 import SearchField from "./components/SearchField";
+import MainMenu from "./components/MainMenu";
 
 const styles = theme => ({
   root: {
@@ -42,6 +43,14 @@ const styles = theme => ({
     position: 'relative',
     overflow: 'hidden',
     width: '320px',
+  },
+  toolBar: {
+    color: 'rgb(255, 255, 255)',
+  },
+  toolBarTitle: {
+    flexGrow:1,
+    marginLeft: '16px',
+    marginRight: '16px',
   },
   asideToolbar: {
     borderBottom: '1px solid  rgba(0, 0, 0, 0.12)',
@@ -79,10 +88,11 @@ class PermanentDrawer extends React.Component {
             position="absolute"
             className={classNames(classes.appBar, classes[`appBar-${anchor}`])}
           >
-            <Toolbar>
-              <Typography variant="title" color="inherit" noWrap>
+            <Toolbar className={classes.toolBar}>
+              <Typography  className={classes.toolBarTitle} variant="title" color="inherit" noWrap>
                 React chat
               </Typography>
+              <MainMenu/>
             </Toolbar>
           </AppBar>
           <Drawer
