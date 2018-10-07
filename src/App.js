@@ -11,6 +11,12 @@ import Paper from '@material-ui/core/Paper';
 import SelectList from "./components/SelectList";
 import SearchField from "./components/SearchField";
 import MainMenu from "./components/MainMenu";
+import TextField from "@material-ui/core/TextField";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from '@material-ui/core/MenuItem';
+import Avatar from '@material-ui/core/Avatar';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+import IconButton from '@material-ui/core/IconButton';
 
 const styles = theme => ({
   root: {
@@ -27,9 +33,29 @@ const styles = theme => ({
   appBar: {
     width: `calc(100% - 320px)`,
   },
-  chatList: {
-    flexGrow:1,
+  chatMessageWrap: {
+    boxSizing: 'border-box',
+    width: '100%',
+    height: '100%',
     overflow: 'auto',
+    paddingTop: '24px',
+    paddingBottom: '179px'
+  },
+  chatMessage: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    padding: '8px 24px',
+  },
+  chatMessageMe: {
+    flexDirection: 'row-reverse',
+  },
+  chatListPaper: {
+    marginLeft: '16px',
+    marginRight: '16px',
+    padding: '6px',
+    maxWidth: '70%',
+    minWidth: '10%',
   },
   'appBar-left': {
     marginLeft: '320px',
@@ -61,25 +87,51 @@ const styles = theme => ({
     display: 'flex',
     flexGrow: 1,
     backgroundColor: theme.palette.background.default,
-    padding: theme.spacing.unit * 3,
     alignItems: 'center',
     justifyContent: 'center',
+    paddingTop: '64px',
+    height: '100%',
   },
   paper: {
-    padding: '24px'
+    padding: '24px',
+    display: 'none',
+  },
+  textFieldWrap: {
+    left: '320px',
+    right: 0,
+    bottom: 0,
+    padding: '24px',
+    position: 'fixed',
+  },
+  textFieldPaper: {
+    padding: '16px'
+  },
+  toolBarAvatar: {
+    marginTop: 0,
+    marginRight: 0,
+    marginLeft: 0,
   }
-
 });
 
 class PermanentDrawer extends React.Component {
   state = {
     anchor: 'left',
+    anchorEl: null,
   };
 
+  handleClick = event => {
+    this.setState({ anchorEl: event.currentTarget });
+  };
+
+  handleClose = () => {
+    this.setState({ anchorEl: null });
+  };
 
   render() {
     const { classes } = this.props;
     const { anchor } = this.state;
+    const { anchorEl } = this.state;
+    const open = Boolean(anchorEl);
 
     return (
       <div className={classes.root}>
@@ -89,8 +141,32 @@ class PermanentDrawer extends React.Component {
             className={classNames(classes.appBar, classes[`appBar-${anchor}`])}
           >
             <Toolbar className={classes.toolBar}>
+              <Avatar className={classes.toolBarAvatar}>OP</Avatar>
               <Typography  className={classes.toolBarTitle} variant="title" color="inherit" noWrap>
-                React chat
+                Name
+                <IconButton
+                  aria-label="More"
+                  aria-owns={open ? 'long-menu' : null}
+                  aria-haspopup="true"
+                  color="inherit"
+                  onClick={this.handleClick}
+                >
+                  <MoreVertIcon />
+                </IconButton>
+                <Menu
+                  id="long-menu"
+                  anchorEl={anchorEl}
+                  open={open}
+                  onClose={this.handleClose}
+                  PaperProps={{
+                    style: {
+                    },
+                  }}
+                >
+                  <MenuItem  onClick={this.handleClose}>
+                    Delete
+                  </MenuItem>
+                </Menu>
               </Typography>
               <MainMenu/>
             </Toolbar>
@@ -120,6 +196,62 @@ class PermanentDrawer extends React.Component {
                 Use <strong>Recents</strong> to see your recent conversations.
               </Typography>
             </Paper>
+            <div className={classes.chatMessageWrap}>
+              <div className={classNames(classes.chatMessage, classes.chatMessageMe)}>
+                <Avatar>G</Avatar>
+                <Paper className={classes.chatListPaper} elevation={3}>
+                  <Typography  component="span">
+                    Gennadiy
+                  </Typography>
+                  <Typography  variant={'body2'} component="p">
+                    How are you?
+                  </Typography>
+                  <Typography variant={'caption'} component="span">
+                    a few seconds ago
+                  </Typography>
+                </Paper>
+              </div>
+              <div className={classNames(classes.chatMessage)}>
+                <Avatar>G</Avatar>
+                <Paper className={classes.chatListPaper} elevation={3}>
+                  <Typography  component="span">
+                    Gennadiy
+                  </Typography>
+                  <Typography  variant={'body2'} component="p">
+                    How are you?
+                  </Typography>
+                  <Typography variant={'caption'} component="span">
+                    a few seconds ago
+                  </Typography>
+                </Paper>
+              </div>
+              <div className={classNames(classes.chatMessage)}>
+                <Avatar>G</Avatar>
+                <Paper className={classes.chatListPaper} elevation={3}>
+                  <Typography  component="span">
+                    Gennadiy
+                  </Typography>
+                  <Typography  variant={'body2'} component="p">
+                    How are you?
+                  </Typography>
+                  <Typography variant={'caption'} component="span">
+                    a few seconds ago
+                  </Typography>
+                </Paper>
+              </div>
+            </div>
+            <div className={classes.textFieldWrap}>
+              <Paper  elevation={3} className={classes.textFieldPaper}>
+                <TextField
+                  placeholder="Type your message..."
+                  fullWidth
+                  margin="normal"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                />
+              </Paper>
+            </div>
           </main>
         </div>
       </div>
