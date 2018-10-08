@@ -17,6 +17,9 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Avatar from '@material-ui/core/Avatar';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import IconButton from '@material-ui/core/IconButton';
+import titleInitials from './utils/title-initial'
+import { chats, messages } from './mock-data'
+
 
 const styles = theme => ({
   root: {
@@ -141,7 +144,7 @@ class PermanentDrawer extends React.Component {
             className={classNames(classes.appBar, classes[`appBar-${anchor}`])}
           >
             <Toolbar className={classes.toolBar}>
-              <Avatar className={classes.toolBarAvatar}>OP</Avatar>
+              <Avatar className={classes.toolBarAvatar}>{titleInitials('Jon Lenon Jon Lenon')}</Avatar>
               <Typography  className={classes.toolBarTitle} variant="title" color="inherit" noWrap>
                 Name
                 <IconButton
