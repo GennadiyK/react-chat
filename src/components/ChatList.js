@@ -13,7 +13,7 @@ import AddIcon from '@material-ui/icons/Add';
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    overflow: 'after',
+    overflow: 'auto',
     width: '100%',
     maxWidth: 360,
     backgroundColor: theme.palette.background.paper,
@@ -39,7 +39,7 @@ const styles = theme => ({
   }
 });
 
-class SelectedListItem extends React.Component {
+class ChatList extends React.Component {
   state = {
     selectedIndex: 1,
   };
@@ -49,31 +49,27 @@ class SelectedListItem extends React.Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, chats } = this.props;
+
+    const chatItems = chats.map((chat, index) =>
+      <ListItem
+        button
+        selected={this.state.selectedIndex === index}
+        onClick={event => this.handleListItemClick(event, index)}
+        disableGutters={true}
+        className={classes.listItem}
+        key={index}
+      >
+
+        <Avatar className={classNames(classes.purpleAvatar, classes.listItemAvatar)}>OP</Avatar>
+        <ListItemText primary={chat.title} secondary={chat.date}/>
+      </ListItem>
+    );
 
     return (
       <div className={classes.root}>
         <List component="nav">
-          <ListItem
-            button
-            selected={this.state.selectedIndex === 0}
-            onClick={event => this.handleListItemClick(event, 0)}
-            disableGutters={true}
-            className={classes.listItem}
-          >
-            <Avatar className={classNames(classes.purpleAvatar, classes.listItemAvatar)}>OP</Avatar>
-            <ListItemText primary="Vacation" secondary="July 20, 2014" />
-          </ListItem>
-          <ListItem
-            button
-            selected={this.state.selectedIndex === 1}
-            onClick={event => this.handleListItemClick(event, 1)}
-            disableGutters={true}
-            className={classes.listItem}
-          >
-            <Avatar className={classNames(classes.purpleAvatar, classes.listItemAvatar)}>OP</Avatar>
-            <ListItemText primary="Vacation" secondary="July 20, 2014" />
-          </ListItem>
+          {chatItems}
         </List>
         <Button variant="fab" color="primary" aria-label="Add" className={classes.addButton}>
           <AddIcon />
@@ -83,8 +79,8 @@ class SelectedListItem extends React.Component {
   }
 }
 
-SelectedListItem.propTypes = {
+ChatList.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(SelectedListItem);
+export default withStyles(styles)(ChatList);
