@@ -51,25 +51,23 @@ class ChatList extends React.Component {
   render() {
     const { classes, chats } = this.props;
 
-    const chatItems = chats.map((chat, index) =>
-      <ListItem
-        button
-        selected={this.state.selectedIndex === index}
-        onClick={event => this.handleListItemClick(event, index)}
-        disableGutters={true}
-        className={classes.listItem}
-        key={index}
-      >
-
-        <Avatar className={classNames(classes.purpleAvatar, classes.listItemAvatar)}>OP</Avatar>
-        <ListItemText primary={chat.title} secondary={chat.date}/>
-      </ListItem>
-    );
-
     return (
       <div className={classes.root}>
         <List component="nav">
-          {chatItems}
+          {chats && chats.map((chat, index) =>
+            <ListItem
+              button
+              selected={this.state.selectedIndex === index}
+              onClick={event => this.handleListItemClick(event, index)}
+              disableGutters={true}
+              className={classes.listItem}
+              key={index}
+            >
+
+              <Avatar className={classNames(classes.purpleAvatar, classes.listItemAvatar)}>OP</Avatar>
+              <ListItemText primary={chat.title} secondary={chat.date}/>
+            </ListItem>
+          )}
         </List>
         <Button variant="fab" color="primary" aria-label="Add" className={classes.addButton}>
           <AddIcon />

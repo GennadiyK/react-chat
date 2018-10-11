@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import TextField from "@material-ui/core/TextField";
 import Avatar from '@material-ui/core/Avatar';
+import titleInitials from '../utils/title-initial'
 
 
 const styles = theme => ({
@@ -68,7 +69,7 @@ const styles = theme => ({
 class MessageContainer extends React.Component {
 
   render() {
-    const { classes } = this.props;
+    const { classes, messages } = this.props;
 
     return (
       <main className={classes.content}>
@@ -84,48 +85,22 @@ class MessageContainer extends React.Component {
           </Typography>
         </Paper>
         <div className={classes.chatMessageWrap}>
-          <div className={classNames(classes.chatMessage, classes.chatMessageMe)}>
-            <Avatar>G</Avatar>
-            <Paper className={classes.chatListPaper} elevation={3}>
-              <Typography  component="span">
-                Gennadiy
-              </Typography>
-              <Typography  variant={'body2'} component="p">
-                How are you?
-              </Typography>
-              <Typography variant={'caption'} component="span">
-                a few seconds ago
-              </Typography>
-            </Paper>
-          </div>
-          <div className={classNames(classes.chatMessage)}>
-            <Avatar>G</Avatar>
-            <Paper className={classes.chatListPaper} elevation={3}>
-              <Typography  component="span">
-                Gennadiy
-              </Typography>
-              <Typography  variant={'body2'} component="p">
-                How are you?
-              </Typography>
-              <Typography variant={'caption'} component="span">
-                a few seconds ago
-              </Typography>
-            </Paper>
-          </div>
-          <div className={classNames(classes.chatMessage)}>
-            <Avatar>G</Avatar>
-            <Paper className={classes.chatListPaper} elevation={3}>
-              <Typography  component="span">
-                Gennadiy
-              </Typography>
-              <Typography  variant={'body2'} component="p">
-                How are you?
-              </Typography>
-              <Typography variant={'caption'} component="span">
-                a few seconds ago
-              </Typography>
-            </Paper>
-          </div>
+          {messages && messages.map((message) =>
+            <div className={message.sender === 'me' ? classNames(classes.chatMessage, classes.chatMessageMe) : classes.chatMessage}>
+              <Avatar>{titleInitials(message.sender)}</Avatar>
+              <Paper className={classes.chatListPaper} elevation={3}>
+                <Typography  component="span">
+                  {message.sender}
+                </Typography>
+                <Typography  variant={'body2'} component="p">
+                  {message.content}
+                </Typography>
+                <Typography variant={'caption'} component="span">
+                  a few seconds ago
+                </Typography>
+              </Paper>
+            </div>
+          )}
         </div>
         <div className={classes.textFieldWrap}>
           <Paper  elevation={3} className={classes.textFieldPaper}>
