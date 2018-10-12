@@ -1,13 +1,10 @@
 import React from 'react'
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import TextField from "@material-ui/core/TextField";
-import Avatar from '@material-ui/core/Avatar';
-import titleInitials from '../utils/title-initial'
-
+import Message from "./Message";
 
 const styles = theme => ({
   chatMessageWrap: {
@@ -17,22 +14,6 @@ const styles = theme => ({
     overflow: 'auto',
     paddingTop: '24px',
     paddingBottom: '179px'
-  },
-  chatMessage: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    padding: '8px 24px',
-  },
-  chatMessageMe: {
-    flexDirection: 'row-reverse',
-  },
-  chatListPaper: {
-    marginLeft: '16px',
-    marginRight: '16px',
-    padding: '6px',
-    maxWidth: '70%',
-    minWidth: '10%',
   },
   'appBar-left': {
     marginLeft: '320px',
@@ -85,21 +66,8 @@ class MessageContainer extends React.Component {
           </Typography>
         </Paper>
         <div className={classes.chatMessageWrap}>
-          {messages && messages.map((message) =>
-            <div className={message.sender === 'me' ? classNames(classes.chatMessage, classes.chatMessageMe) : classes.chatMessage}>
-              <Avatar>{titleInitials(message.sender)}</Avatar>
-              <Paper className={classes.chatListPaper} elevation={3}>
-                <Typography  component="span">
-                  {message.sender}
-                </Typography>
-                <Typography  variant={'body2'} component="p">
-                  {message.content}
-                </Typography>
-                <Typography variant={'caption'} component="span">
-                  a few seconds ago
-                </Typography>
-              </Paper>
-            </div>
+          {messages && messages.map((message, index) =>
+            <Message key={index} {...message}/>
           )}
         </div>
         <div className={classes.textFieldWrap}>
