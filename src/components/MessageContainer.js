@@ -3,8 +3,8 @@ import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
-import TextField from "@material-ui/core/TextField";
 import Message from "./Message";
+import MessageInput from "./MessageInput";
 
 const styles = theme => ({
   chatMessageWrap: {
@@ -71,16 +71,7 @@ class MessageContainer extends React.Component {
           )}
         </div>
         <div className={classes.textFieldWrap}>
-          <Paper  elevation={3} className={classes.textFieldPaper}>
-            <TextField
-              placeholder="Type your message..."
-              fullWidth
-              margin="normal"
-              InputLabelProps={{
-                shrink: true,
-              }}
-            />
-          </Paper>
+          <MessageInput/>
         </div>
       </main>
     )
