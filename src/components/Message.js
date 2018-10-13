@@ -2,7 +2,7 @@ import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import Avatar from '@material-ui/core/Avatar';
+import Avatar from './Avatar';
 import titleInitials from '../utils/title-initial';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
@@ -33,7 +33,7 @@ class Message extends React.Component {
 
        return (
             <div className={sender === 'me' ? classNames(classes.chatMessage, classes.chatMessageMe) : classes.chatMessage}>
-                <Avatar>{titleInitials(sender)}</Avatar>
+                <Avatar colorFrom={sender}>{titleInitials(sender)}</Avatar>
                 <Paper className={classes.chatMessageInner} elevation={3}>
                     <Typography  component="span">
                         {sender}

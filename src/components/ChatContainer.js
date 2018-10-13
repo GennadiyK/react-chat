@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Drawer from '@material-ui/core/Drawer';
 import Toolbar from '@material-ui/core/Toolbar';
 import SimpleBottomNavigation from './BottomNavigation';
-import SelectList from "./ChatList";
+import ChatList from "./ChatList";
 import SearchField from "./SearchField";
 
 const styles = theme => ({
@@ -39,7 +39,7 @@ class ChatContainer extends React.Component {
         <Toolbar className={classes.asideToolbar}>
           <SearchField/>
         </Toolbar>
-        <SelectList chats={chats}/>
+        <ChatList chats={chats}/>
         <SimpleBottomNavigation/>
       </Drawer>
     )

@@ -1,7 +1,7 @@
 import React from 'react';
+import Header from './components/Header'
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Header from './components/Header'
 import ChatContainer from './components/ChatContainer';
 import MessageContainer from "./components/MessageContainer";
 import { chats, messages } from './mock-data'
@@ -21,24 +21,20 @@ const styles = theme => ({
   },
 });
 
-class PermanentDrawer extends React.Component {
-  render() {
-    const { classes } = this.props;
-
-    return (
-      <div className={classes.root}>
-        <div className={classes.appFrame}>
-          <Header/>
-          <ChatContainer chats={chats}/>
-          <MessageContainer messages={messages}/>
-        </div>
+function App ({classes}) {
+  return (
+    <div className={classes.root}>
+      <div className={classes.appFrame}>
+        <Header/>
+        <ChatContainer chats={chats}/>
+        <MessageContainer messages={messages}/>
       </div>
-    );
-  }
+    </div>
+  );
 }
 
-PermanentDrawer.propTypes = {
-  classes: PropTypes.object.isRequired,
+App.propTypes = {
+    classes: PropTypes.objectOf(PropTypes.string).isRequired,
 };
 
-export default withStyles(styles)(PermanentDrawer);
+export default withStyles(styles)(App);

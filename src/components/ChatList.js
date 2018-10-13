@@ -5,10 +5,10 @@ import { withStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import Avatar from '@material-ui/core/Avatar';
-import deepPurple from "@material-ui/core/es/colors/deepPurple";
+import Avatar from './Avatar';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
+
 
 const styles = theme => ({
   root: {
@@ -17,11 +17,6 @@ const styles = theme => ({
     width: '100%',
     maxWidth: 360,
     backgroundColor: theme.palette.background.paper,
-  },
-  purpleAvatar: {
-    margin: 10,
-    color: '#fff',
-    backgroundColor: deepPurple[500],
   },
   addButton: {
     position: 'absolute',
@@ -33,9 +28,11 @@ const styles = theme => ({
     paddingRight: '16px',
   },
   listItemAvatar: {
+    color: '#fff',
     marginTop: 0,
     marginLeft: 0,
     marginBottom: 0,
+    marginRight: 10,
   }
 });
 
@@ -50,7 +47,6 @@ class ChatList extends React.Component {
 
   render() {
     const { classes, chats } = this.props;
-
     return (
       <div className={classes.root}>
         <List component="nav">
@@ -64,7 +60,7 @@ class ChatList extends React.Component {
               key={index}
             >
 
-              <Avatar className={classNames(classes.purpleAvatar, classes.listItemAvatar)}>OP</Avatar>
+              <Avatar className={classNames(classes.listItemAvatar)} colorFrom={chat.title}>{chat.title}</Avatar>
               <ListItemText primary={chat.title} secondary={chat.date}/>
             </ListItem>
           )}
