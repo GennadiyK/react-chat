@@ -7,7 +7,9 @@ import RestoreIcon from '@material-ui/icons/Restore';
 import ExploreIcon from '@material-ui/icons/Explore';
 
 const styles = {
-
+  root: {
+    position: 'relative',
+  },
 };
 
 class SimpleBottomNavigation extends React.Component {
