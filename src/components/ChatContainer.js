@@ -23,27 +23,22 @@ const styles = theme => ({
 });
 
 
-class ChatContainer extends React.Component {
-
-  render() {
-    const { classes, chats } = this.props;
-
-    return (
-      <Drawer
-        variant="permanent"
-        classes={{
-          paper: classes.drawerPaper,
-        }}
-        anchor="left"
-      >
-        <Toolbar className={classes.asideToolbar}>
-          <SearchField/>
-        </Toolbar>
-        <ChatList chats={chats}/>
-        <SimpleBottomNavigation/>
-      </Drawer>
-    )
-  }
+function ChatContainer ({ classes, chats }) {
+  return (
+    <Drawer
+      variant="permanent"
+      classes={{
+        paper: classes.drawerPaper,
+      }}
+      anchor="left"
+    >
+      <Toolbar className={classes.asideToolbar}>
+        <SearchField/>
+      </Toolbar>
+      <ChatList chats={chats}/>
+      <SimpleBottomNavigation/>
+    </Drawer>
+  )
 }
 
 ChatContainer.propTypes = {

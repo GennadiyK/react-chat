@@ -33,12 +33,7 @@ function AccountIcon(props) {
   );
 }
 
-class MainMenu  extends React.Component {
-
-
-  render() {
-    const { classes } = this.props;
-
+function MainMenu ({classes}) {
     return (
       <WithState>
         {({ anchorEl, updateAnchorEl }) => {
@@ -71,7 +66,6 @@ class MainMenu  extends React.Component {
         }}
       </WithState>
     );
-  }
 }
 
 MainMenu.propTypes = {
