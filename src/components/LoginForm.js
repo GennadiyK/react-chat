@@ -1,42 +1,40 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
 const styles = theme => ({
-
+  btn: {
+    marginTop: '16px'
+  }
 });
 
 
 class SignInForm extends React.Component {
-
   render() {
     const { classes } = this.props;
 
     return (
       <form noValidate autoComplete="off">
         <TextField
-          id="standard-password-input"
-          label="Password"
-          className={classes.textField}
-          type="password"
-          autoComplete="current-password"
+          id="login-username-input"
+          label="Username*"
+          type="text"
+          autoComplete="current-name"
           margin="normal"
           fullWidth={true}
         />
         <TextField
-          id="standard-password-input"
-          label="Password"
-          className={classes.textField}
+          id="login-password-input"
+          label="Password*"
           type="password"
           autoComplete="current-password"
           margin="normal"
           fullWidth={true}
         />
-        <Button fullWidth={true} variant="contained" color="primary">
-          signin
+        <Button className={classes.btn} fullWidth={true} variant="contained" color="primary">
+          login
         </Button>
       </form>
     );
