@@ -12,37 +12,43 @@ const styles = theme => ({
 
 
 class SignInForm extends React.Component {
-
+  handleSubmit (e) {
+    e.preventDefault();
+    console.log('!!!')
+  }
   render() {
     const { classes } = this.props;
 
     return (
-      <form noValidate autoComplete="off">
+      <form onSubmit={this.handleSubmit}>
         <TextField
           id="signin-username-input"
-          label="Username*"
+          label="Username"
           type="text"
           autoComplete="current-name"
           margin="normal"
+          required={true}
           fullWidth={true}
         />
         <TextField
           id="signin-password-input"
-          label="Password*"
+          label="Password"
           type="password"
           autoComplete="current-password"
           margin="normal"
+          required={true}
           fullWidth={true}
         />
         <TextField
           id="signin-repeat-password-input"
-          label="Password*"
+          label="Password"
           type="password"
           autoComplete="current-password"
           margin="normal"
+          required={true}
           fullWidth={true}
         />
-        <Button className={classes.btn} fullWidth={true} variant="contained" color="primary">
+        <Button className={classes.btn} fullWidth={true} variant="contained" color="primary" type="submit">
           signup
         </Button>
       </form>
