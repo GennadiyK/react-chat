@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
@@ -32,8 +33,14 @@ class WelcomeContainer extends React.Component {
   };
 
   render() {
-    const { classes, signup, login } = this.props;
+    const { classes, signup, login, isAuthenticated } = this.props;
     const { value } = this.state;
+
+    if(isAuthenticated) {
+      return (
+        <Redirect to='/chat'/>
+      )
+    }
 
     return (
       <Card className={classes.container}>
