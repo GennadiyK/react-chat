@@ -2,11 +2,16 @@ import React from 'react'
 import Header from "../Header";
 import WelcomeContainer from "../WelcomeContainer";
 
-const WelcomePage = () => (
-  <div>
-    <Header/>
-    <WelcomeContainer/>
-  </div>
-);
+class WelcomePage extends React.Component {
+  render() {
+    const { signup, login } = this.props;
+    return (
+      <div>
+        <Header/>
+        <WelcomeContainer signup={signup} login={login}/>
+      </div>
+    )
+  }
+}
 
 export default WelcomePage;

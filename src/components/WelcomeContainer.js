@@ -32,7 +32,7 @@ class WelcomeContainer extends React.Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, signup, login } = this.props;
     const { value } = this.state;
 
     return (
@@ -50,8 +50,8 @@ class WelcomeContainer extends React.Component {
           </Tabs>
         </AppBar>
         <CardContent className={classes.containerInner}>
-          {value === 0 && <LoginForm/>}
-          {value === 1 && <SignUpForm/>}
+          {value === 0 && <LoginForm onSubmit={login}/>}
+          {value === 1 && <SignUpForm onSubmit={signup}/>}
         </CardContent>
       </Card>
     );

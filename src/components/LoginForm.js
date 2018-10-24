@@ -48,7 +48,7 @@ class SignInForm extends React.Component {
     e.preventDefault();
     const { username, password } = this.state;
 
-    console.log(username.value, password.value)
+    this.props.onSubmit(username.value, password.value);
   }
 
   render() {

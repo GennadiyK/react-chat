@@ -43,7 +43,7 @@ class SignInForm extends React.Component {
     }
 
 
-    console.log(username.value, password.value)
+    this.props.onSubmit(username.value, password.value);
   }
   handleInputChange(e) {
     e.persist()
