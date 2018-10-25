@@ -1,5 +1,5 @@
-import connect from 'react-redux';
-import ChatPage from '../components/pages/ChatPage'
+import {connect} from 'react-redux';
+import ChatPage from '../components/ChatPage'
 
 const matStateToProps = state => ({
 
