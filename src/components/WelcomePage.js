@@ -9,6 +9,7 @@ import LoginForm from "./LoginForm";
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import AppBar from "@material-ui/core/AppBar";
+import Header from "./Header";
 
 const styles = theme => ({
   container: {
@@ -23,7 +24,7 @@ const styles = theme => ({
 });
 
 
-class WelcomeContainer extends React.Component {
+class WelcomePage extends React.Component {
   state = {
     value: 0,
   };
@@ -43,30 +44,33 @@ class WelcomeContainer extends React.Component {
     }
 
     return (
-      <Card className={classes.container}>
-        <AppBar position="static" color="default">
-          <Tabs
-            value={this.state.value}
-            onChange={this.handleChange}
-            indicatorColor="secondary"
-            textColor="inherit"
-            fullWidth
-          >
-            <Tab label="Login" />
-            <Tab label="Sign Up" />
-          </Tabs>
-        </AppBar>
-        <CardContent className={classes.containerInner}>
-          {value === 0 && <LoginForm onSubmit={login}/>}
-          {value === 1 && <SignUpForm onSubmit={signup}/>}
-        </CardContent>
-      </Card>
+      <React.Fragment>
+        <Header/>
+        <Card className={classes.container}>
+          <AppBar position="static" color="default">
+            <Tabs
+              value={this.state.value}
+              onChange={this.handleChange}
+              indicatorColor="secondary"
+              textColor="inherit"
+              fullWidth
+            >
+              <Tab label="Login" />
+              <Tab label="Sign Up" />
+            </Tabs>
+          </AppBar>
+          <CardContent className={classes.containerInner}>
+            {value === 0 && <LoginForm onSubmit={login}/>}
+            {value === 1 && <SignUpForm onSubmit={signup}/>}
+          </CardContent>
+        </Card>
+      </React.Fragment>
     );
   }
 }
 
-WelcomeContainer.propTypes = {
+WelcomePage.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(WelcomeContainer);
+export default withStyles(styles)(WelcomePage);

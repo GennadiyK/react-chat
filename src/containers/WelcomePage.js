@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import WelcomePage from '../components/pages/WelcomePage';
+import WelcomePage from '../components/WelcomePage';
 import {signup, login} from '../actions';
 
 const mapStateToProps = state => ({

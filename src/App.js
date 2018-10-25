@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
 import configureStore from './store'
 import ChatPage from './components/pages/ChatPage'
-import WelcomePage from "./components/pages/WelcomePage";
+import WelcomePage from "./containers/WelcomePage";
 
 const store = configureStore();
 
