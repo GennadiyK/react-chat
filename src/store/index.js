@@ -3,9 +3,25 @@ import reducer from '../reducers';
 import thunkMiddleware from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
+const composeEnhancers = composeWithDevTools({
+  serialize: true
+});
+
 export default function configureStore() {
-  return createStore(
+  const store =  createStore(
     reducer,
-    composeWithDevTools(applyMiddleware(thunkMiddleware)),
+    process.env.NODE_ENV === 'production' ?
+      applyMiddleware(thunkMiddleware) :
+      composeEnhancers(applyMiddleware(thunkMiddleware)),
   )
+
+  if(module.hot) {
+    module.hot.accept('../reducers', () => {
+      store.replaceReducer(reducer);
+    })
+  }
+
+  return store;
 }
+
+
