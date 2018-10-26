@@ -4,14 +4,16 @@ import {
   LOGOUT_REQUEST, LOGOUT_FAILURE, LOGOUT_SUCCESS
 } from '../constants/auth'
 
+const token = localStorage.getItem('token');
 
 const initialState = {
-  isAuthenticated: false,
+  isAuthenticated: !!token,
   user: null,
-  token: ''
+  token
 };
 
 export default function auth (state = initialState, action) {
+  console.log(action);
   switch (action.type) {
     case SIGNUP_SUCCESS:
     case LOGIN_SUCCESS:

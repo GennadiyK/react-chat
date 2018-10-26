@@ -8,7 +8,7 @@ export function signup (username, password) {
   return (dispatch) => {
     dispatch({
       type: SIGNUP_REQUEST
-    })
+    });
 
     return fetch('http://localhost:8000/v1/signup', {
       method: 'POST',
@@ -17,12 +17,23 @@ export function signup (username, password) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        username: username.value,
-        password: password.value
+        username: username,
+        password: password
       })
     })
     .then(response => response.json())
     .then((json) => {
+      if(json.success) {
+        return json;
+      }
+
+      throw new Error(json.message)
+    })
+    .then((json) => {
+      if(!json.token) {
+        throw new Error('Token has not been provided');
+      }
+      localStorage.setItem('token', json.token);
       dispatch({
         type: SIGNUP_SUCCESS,
         payload: json
@@ -50,20 +61,31 @@ export function login (username, password) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        username: username.value,
-        password: password.value
+        username: username,
+        password: password
       })
     })
       .then(response => response.json())
       .then((json) => {
+        if(json.success) {
+          return json;
+        }
+
+        throw new Error(json.message)
+      })
+      .then((json) => {
+        if(!json.token) {
+          throw new Error('Token has not been provided');
+        }
+        localStorage.setItem('token', json.token);
         dispatch({
-          type: SIGNUP_SUCCESS,
+          type: LOGIN_SUCCESS,
           payload: json
         })
       })
       .catch((err) => {
         dispatch({
-          type: SIGNUP_FAILURE,
+          type: LOGIN_FAILURE,
           payload: err
         })
       });
