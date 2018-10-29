@@ -1,19 +1,21 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
+import {Router, Route, Switch, Redirect} from 'react-router-dom';
 import configureStore from './store'
 import ChatPage from './containers/ChatPage'
 import WelcomePage from "./containers/WelcomePage";
+import PrivateRoute from './containers/PrivateRoute';
+import history from './utils/history'
 
 const store = configureStore();
 
 const App = () => {
   return(
     <Provider store={store}>
-      <Router>
+      <Router history={history}>
         <Switch>
           <Route exact path="/" component={WelcomePage}/>
-          <Route path="/chat" component={ChatPage}/>
+          <PrivateRoute path="/chat" component={ChatPage}/>
           <Redirect to="/"/>
         </Switch>
       </Router>

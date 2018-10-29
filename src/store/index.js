@@ -13,7 +13,7 @@ export default function configureStore() {
     process.env.NODE_ENV === 'production' ?
       applyMiddleware(thunkMiddleware) :
       composeEnhancers(applyMiddleware(thunkMiddleware)),
-  )
+  );
 
   if(module.hot) {
     module.hot.accept('../reducers', () => {
