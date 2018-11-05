@@ -8,7 +8,7 @@ import ChatList from "./ChatList";
 import SearchField from "./SearchField";
 import ChatHeader from "./ChatHeader";
 import MessageContainer from "./MessageContainer";
-import { chats, messages } from '../mock-data'
+import { messages } from '../mock-data'
 
 const styles = theme => ({
   root: {
@@ -38,8 +38,27 @@ const styles = theme => ({
 
 
 class ChatPage extends React.Component {
+  componentDidMount() {
+    const {
+      fetchAllChats,
+      fetchMyChats,
+    } = this.props;
+
+    Promise.all([
+      fetchAllChats(),
+      fetchMyChats()
+    ]);
+
+    console.log('PROPS', this.props)
+
+  }
+
   render() {
-    const {classes} = this.props;
+    const {
+      classes,
+      chats
+    } = this.props;
+
     return (
       <div className={classes.root}>
         <div className={classes.appFrame}>

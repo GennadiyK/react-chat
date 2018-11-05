@@ -47,10 +47,12 @@ class ChatList extends React.Component {
 
   render() {
     const { classes, chats } = this.props;
+    console.log('chat', chats)
     return (
       <div className={classes.root}>
         <List component="nav">
           {chats && chats.map((chat, index) =>
+
             <ListItem
               button
               selected={this.state.selectedIndex === index}

@@ -1,7 +1,6 @@
 import fetch from 'isomorphic-fetch';
 
 export default function (endpoint, token, options, payload) {
-  console.log('payload', payload)
   const authHeader = token ? {
     'Authorization': `Bearer ${token}`,
   } : {};
