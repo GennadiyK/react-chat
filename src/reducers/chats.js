@@ -40,10 +40,12 @@ const byIds = (state = initialState.byIds, action) => {
     case types.FETCH_MY_CHATS_SUCCESS:
       return {
         ...state,
-        ...action.payload.chats.reduce((ids, chat) => ({
-          ...ids,
-          [chat.id]:chat
-        }), {})
+        ...action.payload.chats.reduce((ids, chat) => {
+          return {
+            ...ids,
+            [chat._id]: chat
+          }
+        }, {})
       };
     default:
       return state;
@@ -59,4 +61,8 @@ export default combineReducers({
 
 
 export const getChatId = (chat) => chat._id;
-export const getByIds = (state, ids) => ids.map(id => state.byIds[id]);
+export const getByIds = (state, ids) => {
+  return ids.map(id => {
+    return state.byIds[id]
+  });
+}

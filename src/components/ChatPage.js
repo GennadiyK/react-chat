@@ -48,9 +48,6 @@ class ChatPage extends React.Component {
       fetchAllChats(),
       fetchMyChats()
     ]);
-
-    console.log('PROPS', this.props)
-
   }
 
   render() {
