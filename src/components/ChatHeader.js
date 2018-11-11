@@ -49,7 +49,6 @@ class ChatHeader extends React.Component {
     const { classes } = this.props;
     const { anchorEl } = this.state;
     const open = Boolean(anchorEl);
-
     return (
        <AppBar
             position="absolute"
@@ -83,7 +82,7 @@ class ChatHeader extends React.Component {
                 </MenuItem>
               </Menu>
             </Typography>
-            <MainMenu/>
+            <MainMenu logout={this.props.logout}/>
           </Toolbar>
        </AppBar>
     )
@@ -92,6 +91,7 @@ class ChatHeader extends React.Component {
 
 ChatHeader.propTypes = {
   classes: PropTypes.object.isRequired,
+  logout: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles)(ChatHeader);

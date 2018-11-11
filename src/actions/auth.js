@@ -59,6 +59,20 @@ export function logout () {
     dispatch({
       type: types.LOGOUT_REQUEST
     })
+
+    return callApi('logout')
+      .then((json) => {
+        dispatch({
+          type: types.LOGOUT_SUCCESS,
+          payload: json
+        })
+      })
+      .catch((err) => {
+        dispatch({
+          type: types.LOGOUT_FAILURE,
+          payload: err
+        })
+      })
   }
 }
 

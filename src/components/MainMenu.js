@@ -33,7 +33,7 @@ function AccountIcon(props) {
   );
 }
 
-function MainMenu ({classes}) {
+function MainMenu ({classes, logout}) {
     return (
       <WithState>
         {({ anchorEl, updateAnchorEl }) => {
@@ -59,7 +59,7 @@ function MainMenu ({classes}) {
               <Menu id="render-props-menu" anchorEl={anchorEl} open={open} onClose={handleClose}>
                 <MenuItem onClick={handleClose}>Profile</MenuItem>
                 <MenuItem onClick={handleClose}>My account</MenuItem>
-                <MenuItem onClick={handleClose}>Logout</MenuItem>
+                <MenuItem onClick={logout}>Logout</MenuItem>
               </Menu>
             </React.Fragment>
           );
@@ -70,6 +70,7 @@ function MainMenu ({classes}) {
 
 MainMenu.propTypes = {
   classes: PropTypes.object.isRequired,
+  logout: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles)(MainMenu);

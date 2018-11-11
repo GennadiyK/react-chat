@@ -53,13 +53,14 @@ class ChatPage extends React.Component {
   render() {
     const {
       classes,
-      chats
+      chats,
+      logout
     } = this.props;
 
     return (
       <div className={classes.root}>
         <div className={classes.appFrame}>
-          <ChatHeader/>
+          <ChatHeader logout={logout}/>
           <Drawer
             variant="permanent"
             classes={{
