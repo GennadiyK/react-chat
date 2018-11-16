@@ -82,7 +82,7 @@ class ChatHeader extends React.Component {
                 </MenuItem>
               </Menu>
             </Typography>
-            <MainMenu logout={this.props.logout}/>
+            <MainMenu showModal={this.props.showModal}/>
           </Toolbar>
        </AppBar>
     )

@@ -9,6 +9,7 @@ import SearchField from "./SearchField";
 import ChatHeader from "./ChatHeader";
 import MessageContainer from "./MessageContainer";
 import { messages } from '../mock-data'
+import ConfirmModal from "./ConfirmModal";
 
 const styles = theme => ({
   root: {
@@ -38,6 +39,10 @@ const styles = theme => ({
 
 
 class ChatPage extends React.Component {
+  state = {
+    open: false,
+  };
+
   componentDidMount() {
     const {
       fetchAllChats,
@@ -50,6 +55,14 @@ class ChatPage extends React.Component {
     ]);
   }
 
+  handleClickOpen = () => {
+    this.setState({ open: true });
+  };
+
+  handleClose = () => {
+    this.setState({ open: false });
+  };
+
   render() {
     const {
       classes,
@@ -60,7 +73,7 @@ class ChatPage extends React.Component {
     return (
       <div className={classes.root}>
         <div className={classes.appFrame}>
-          <ChatHeader logout={logout}/>
+          <ChatHeader showModal={this.handleClickOpen}/>
           <Drawer
             variant="permanent"
             classes={{
@@ -75,6 +88,12 @@ class ChatPage extends React.Component {
             <SimpleBottomNavigation/>
           </Drawer>
           <MessageContainer messages={messages}/>
+          <ConfirmModal
+            isOpen={this.state.open}
+            handleClose={this.handleClose}
+            handleConfirm={logout}
+            title={'Confirm logout'}
+            text={'Do you want to logout?'}/>
         </div>
       </div>
     )

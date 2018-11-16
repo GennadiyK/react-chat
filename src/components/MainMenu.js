@@ -33,7 +33,7 @@ function AccountIcon(props) {
   );
 }
 
-function MainMenu ({classes, logout}) {
+function MainMenu ({classes, showModal}) {
     return (
       <WithState>
         {({ anchorEl, updateAnchorEl }) => {
@@ -59,7 +59,7 @@ function MainMenu ({classes, logout}) {
               <Menu id="render-props-menu" anchorEl={anchorEl} open={open} onClose={handleClose}>
                 <MenuItem onClick={handleClose}>Profile</MenuItem>
                 <MenuItem onClick={handleClose}>My account</MenuItem>
-                <MenuItem onClick={logout}>Logout</MenuItem>
+                <MenuItem onClick={showModal}>Logout</MenuItem>
               </Menu>
             </React.Fragment>
           );
