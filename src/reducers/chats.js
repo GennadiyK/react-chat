@@ -29,6 +29,7 @@ const allIds = (state = initialState.allIds, action) => {
 const  myIds = (state = initialState.myIds, action) => {
   switch (action.type) {
     case types.FETCH_MY_CHATS_SUCCESS:
+    case types.CREATE_CHAT_SUCCESS:
       return action.payload.chats.map(getChatId);
     default:
       return state;

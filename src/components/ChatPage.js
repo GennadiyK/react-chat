@@ -40,40 +40,51 @@ const styles = theme => ({
 
 class ChatPage extends React.Component {
   state = {
-    open: false,
+    confirmModalOpen: false,
+    createChatModalOpen: false,
   };
 
   componentDidMount() {
     const {
       fetchAllChats,
       fetchMyChats,
+      createChat
     } = this.props;
 
     Promise.all([
       fetchAllChats(),
-      fetchMyChats()
+      fetchMyChats(),
     ]);
   }
 
-  handleClickOpen = () => {
-    this.setState({ open: true });
+  handleClickConfirmModal = () => {
+    this.setState({ confirmModalOpen: true });
   };
 
-  handleClose = () => {
-    this.setState({ open: false });
+  handleClickCreateChatModal = () => {
+    this.setState({ createChatModalOpen: true });
+  };
+
+  handleCloseConfirmModal = () => {
+    this.setState({ confirmModalOpen: false });
+  };
+
+  handleCloseCreateChatModal = () => {
+    this.setState({ createChatModalOpen: false });
   };
 
   render() {
     const {
       classes,
       chats,
+      createChat,
       logout
     } = this.props;
 
     return (
       <div className={classes.root}>
         <div className={classes.appFrame}>
-          <ChatHeader showModal={this.handleClickOpen}/>
+          <ChatHeader showModal={this.handleClickConfirmModal}/>
           <Drawer
             variant="permanent"
             classes={{
@@ -84,16 +95,26 @@ class ChatPage extends React.Component {
             <Toolbar className={classes.asideToolbar}>
               <SearchField/>
             </Toolbar>
-            <ChatList chats={chats}/>
+            <ChatList chats={chats} showCreateChatModal={this.handleClickCreateChatModal}/>
             <SimpleBottomNavigation/>
           </Drawer>
           <MessageContainer messages={messages}/>
           <ConfirmModal
-            isOpen={this.state.open}
-            handleClose={this.handleClose}
+            isOpen={this.state.createChatModalOpen}
+            handleClose={this.handleCloseCreateChatModal}
+            handleConfirm={()=> {console.log('create chat')}}
+            title={'Create new chat'}
+          >
+            create chat
+          </ConfirmModal>
+          <ConfirmModal
+            isOpen={this.state.confirmModalOpen}
+            handleClose={this.handleCloseConfirmModal}
             handleConfirm={logout}
             title={'Confirm logout'}
-            text={'Do you want to logout?'}/>
+          >
+            <p>Do you want to logout?</p>
+          </ConfirmModal>
         </div>
       </div>
     )

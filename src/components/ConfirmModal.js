@@ -10,7 +10,6 @@ class ConfirmModal extends React.Component {
   render() {
     const {
       isOpen,
-      text,
       title,
       handleClose,
       handleConfirm
@@ -28,7 +27,7 @@ class ConfirmModal extends React.Component {
           <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
-              {text}
+              { this.props.children }
             </DialogContentText>
           </DialogContent>
           <DialogActions>

@@ -46,7 +46,7 @@ class ChatList extends React.Component {
   };
 
   render() {
-    const { classes, chats } = this.props;
+    const { classes, chats, showCreateChatModal} = this.props;
     console.log('chat', this.props)
     return (
       <div className={classes.root}>
@@ -67,7 +67,7 @@ class ChatList extends React.Component {
             </ListItem>
           )}
         </List>
-        <Button variant="fab" color="primary" aria-label="Add" className={classes.addButton}>
+        <Button variant="fab" color="primary" aria-label="Add" className={classes.addButton} onClick={showCreateChatModal}>
           <AddIcon />
         </Button>
       </div>

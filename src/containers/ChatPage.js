@@ -1,6 +1,11 @@
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {fetchAllChats, fetchMyChats, setActiveChat } from "../actions/chats";
+import {
+  fetchAllChats,
+  fetchMyChats,
+  setActiveChat,
+  createChat
+} from "../actions/chats";
 import {logout} from "../actions/auth";
 import ChatPage from '../components/ChatPage';
 import * as fromChats from '../reducers/chats'
