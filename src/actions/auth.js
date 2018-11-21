@@ -39,7 +39,6 @@ export function login (username, password) {
           throw new Error('Token has not been provided');
         }
         localStorage.setItem('token', json.token);
-        console.log('JSON', json)
         dispatch({
           type: types.LOGIN_SUCCESS,
           payload: json

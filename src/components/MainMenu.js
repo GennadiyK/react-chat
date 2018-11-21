@@ -70,7 +70,6 @@ function MainMenu ({classes, showModal}) {
 
 MainMenu.propTypes = {
   classes: PropTypes.object.isRequired,
-  logout: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles)(MainMenu);

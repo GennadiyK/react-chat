@@ -4,7 +4,6 @@ export default function (endpoint, token, options, payload) {
   const authHeader = token ? {
     'Authorization': `Bearer ${token}`,
   } : {};
-
   return fetch(`http://localhost:8000/v1/${endpoint}`, {
     method: 'GET',
     headers: {

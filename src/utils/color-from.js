@@ -29,8 +29,7 @@ export default function colorFrom(string) {
 
       return colors[colorIndex][500];
   } catch (err) {
-    console.log(err)
-      return blueGrey[500]
+     return blueGrey[500]
   }
 
 

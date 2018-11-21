@@ -98,17 +98,19 @@ export function setActiveChat (chatId) {
 export function createChat(payload) {
   return (dispatch, getState) => {
     const {token} = getState().auth;
-      dispatch({
-        type: types.CREATE_CHAT_REQUEST
-      });
+    dispatch({
+      type: types.CREATE_CHAT_REQUEST
+    });
 
-    return callApi('/chats', token, {method: 'POST'}, payload).then((data) => {
-      console.log('@@@@@@postChat', data)
+    return callApi('chats', token, {method: 'POST'}, payload).then((data) => {
       dispatch({
         type: types.CREATE_CHAT_SUCCESS,
         payload: data
       });
+
+      return data;
     }).catch((err) => {
+      console.log(err)
       dispatch({
         type: types.CREATE_CHAT_FAILURE,
         payload: err

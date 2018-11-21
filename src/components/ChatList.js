@@ -47,7 +47,6 @@ class ChatList extends React.Component {
 
   render() {
     const { classes, chats, showCreateChatModal} = this.props;
-    console.log('chat', this.props)
     return (
       <div className={classes.root}>
         <List component="nav">

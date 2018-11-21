@@ -12,7 +12,7 @@ import * as fromChats from '../reducers/chats'
 
 
 const matStateToProps = state => {
-  console.log('!!!!!!!STATE',  fromChats.getByIds(state.chats, state.chats.allIds))
+  console.log('fromChats', fromChats)
   return {
     chats: fromChats.getByIds(state.chats, state.chats.allIds)
   }
@@ -22,6 +22,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   fetchAllChats,
   fetchMyChats,
   setActiveChat,
+  createChat,
   logout
 }, dispatch);
 

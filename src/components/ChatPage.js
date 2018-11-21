@@ -1,15 +1,14 @@
 import React from 'react'
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
-import Drawer from '@material-ui/core/Drawer';
-import Toolbar from '@material-ui/core/Toolbar';
+import { Toolbar, TextField, Drawer } from '@material-ui/core/';
 import SimpleBottomNavigation from './BottomNavigation';
 import ChatList from "./ChatList";
 import SearchField from "./SearchField";
 import ChatHeader from "./ChatHeader";
 import MessageContainer from "./MessageContainer";
 import { messages } from '../mock-data'
-import ConfirmModal from "./ConfirmModal";
+import Modal from "./Modal";
 
 const styles = theme => ({
   root: {
@@ -42,13 +41,13 @@ class ChatPage extends React.Component {
   state = {
     confirmModalOpen: false,
     createChatModalOpen: false,
+    chatName: null
   };
 
   componentDidMount() {
     const {
       fetchAllChats,
       fetchMyChats,
-      createChat
     } = this.props;
 
     Promise.all([
@@ -73,14 +72,29 @@ class ChatPage extends React.Component {
     this.setState({ createChatModalOpen: false });
   };
 
+  handleChangeNewChatField = (event) => {
+    this.setState({
+      chatName: event.target.value
+    })
+  }
+
+  handleCreateChat = () => {
+    this.props.createChat({
+      data:{
+        title: this.state.chatName
+      }
+    })
+
+    this.handleCloseCreateChatModal()
+  };
+
   render() {
     const {
       classes,
       chats,
-      createChat,
       logout
     } = this.props;
-
+console.log('chats', chats)
     return (
       <div className={classes.root}>
         <div className={classes.appFrame}>
@@ -99,22 +113,30 @@ class ChatPage extends React.Component {
             <SimpleBottomNavigation/>
           </Drawer>
           <MessageContainer messages={messages}/>
-          <ConfirmModal
+          <Modal
             isOpen={this.state.createChatModalOpen}
             handleClose={this.handleCloseCreateChatModal}
-            handleConfirm={()=> {console.log('create chat')}}
+            handleConfirm={this.handleCreateChat}
             title={'Create new chat'}
           >
-            create chat
-          </ConfirmModal>
-          <ConfirmModal
+            <TextField
+              id="standard-textarea"
+              label="New Chat"
+              placeholder="Type the title..."
+              multiline
+              className={classes.textField}
+              margin="normal"
+              onChange={this.handleChangeNewChatField}
+            />
+          </Modal>
+          <Modal
             isOpen={this.state.confirmModalOpen}
             handleClose={this.handleCloseConfirmModal}
             handleConfirm={logout}
             title={'Confirm logout'}
           >
             <p>Do you want to logout?</p>
-          </ConfirmModal>
+          </Modal>
         </div>
       </div>
     )

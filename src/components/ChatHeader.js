@@ -91,7 +91,6 @@ class ChatHeader extends React.Component {
 
 ChatHeader.propTypes = {
   classes: PropTypes.object.isRequired,
-  logout: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles)(ChatHeader);

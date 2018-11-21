@@ -6,7 +6,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-class ConfirmModal extends React.Component {
+class Modal extends React.Component {
   render() {
     const {
       isOpen,
@@ -17,7 +17,6 @@ class ConfirmModal extends React.Component {
 
     return (
       <div>
-        <Button onClick={this.handleClickOpen}>Open alert dialog</Button>
         <Dialog
           open={isOpen}
           onClose={this.handleClose}
@@ -26,9 +25,7 @@ class ConfirmModal extends React.Component {
         >
           <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
           <DialogContent>
-            <DialogContentText id="alert-dialog-description">
-              { this.props.children }
-            </DialogContentText>
+            { this.props.children }
           </DialogContent>
           <DialogActions>
             <Button onClick={handleClose} color="primary">
@@ -44,4 +41,4 @@ class ConfirmModal extends React.Component {
   }
 }
 
-export default ConfirmModal;
+export default Modal;
