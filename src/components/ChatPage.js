@@ -92,13 +92,15 @@ class ChatPage extends React.Component {
     const {
       classes,
       chats,
-      logout
+      logout,
+      activeChat,
+      setActiveChat,
+      deleteChat,
     } = this.props;
-console.log('chats', chats)
     return (
       <div className={classes.root}>
         <div className={classes.appFrame}>
-          <ChatHeader showModal={this.handleClickConfirmModal}/>
+          <ChatHeader showModal={this.handleClickConfirmModal} deleteChat={deleteChat} chats={chats} />
           <Drawer
             variant="permanent"
             classes={{
@@ -109,7 +111,7 @@ console.log('chats', chats)
             <Toolbar className={classes.asideToolbar}>
               <SearchField/>
             </Toolbar>
-            <ChatList chats={chats} showCreateChatModal={this.handleClickCreateChatModal}/>
+            <ChatList chats={chats} setActiveChat={setActiveChat} activeChat={activeChat} showCreateChatModal={this.handleClickCreateChatModal}/>
             <SimpleBottomNavigation/>
           </Drawer>
           <MessageContainer messages={messages}/>

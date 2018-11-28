@@ -7,21 +7,12 @@ const composeEnhancers = composeWithDevTools({
   serialize: true
 });
 
-export default function configureStore() {
-  const store =  createStore(
-    reducer,
-    process.env.NODE_ENV === 'production' ?
-      applyMiddleware(thunkMiddleware) :
-      composeEnhancers(applyMiddleware(thunkMiddleware)),
-  );
 
-  if(module.hot) {
-    module.hot.accept('../reducers', () => {
-      store.replaceReducer(reducer);
-    })
-  }
+export default function configureStore() {
+  const store = createStore(reducer, /* preloadedState, */ composeEnhancers(
+    applyMiddleware(thunkMiddleware),
+    // other store enhancers if any
+  ));
 
   return store;
 }
-
-

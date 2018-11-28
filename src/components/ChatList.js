@@ -38,11 +38,12 @@ const styles = theme => ({
 
 class ChatList extends React.Component {
   state = {
-    selectedIndex: 1,
+    selectedIndex: this.props.activeChat._id,
   };
 
-  handleListItemClick = (event, index) => {
-    this.setState({ selectedIndex: index });
+  handleListItemClick = (event, chatId) => {
+    this.props.setActiveChat(chatId);
+    this.setState({ selectedIndex: chatId });
   };
 
   render() {
@@ -54,8 +55,8 @@ class ChatList extends React.Component {
 
             <ListItem
               button
-              selected={this.state.selectedIndex === index}
-              onClick={event => this.handleListItemClick(event, index)}
+              selected={this.state.selectedIndex === chat._id}
+              onClick={event => this.handleListItemClick(event, chat._id)}
               disableGutters={true}
               className={classes.listItem}
               key={index}

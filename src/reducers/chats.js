@@ -2,18 +2,18 @@ import * as types from '../constants';
 import {combineReducers} from 'redux';
 
 const initialState = {
-  activeId: '',
+  activeChat: {},
   allIds: [],
   myIds: [],
   byIds:{},
 };
 
-const  activeId = (state = initialState.activeId, action) => {
+const  activeChat = (state = initialState.activeChat, action) => {
   switch (action.type) {
     case types.SET_ACTIVE_CHAT:
-      return action.payload.chat._id;
+      return action.payload.chat;
     case types.UNSET_ACTIVE_CHAT:
-      return '';
+      return {};
     default:
       return state;
   }
@@ -23,7 +23,6 @@ const allIds = (state = initialState.allIds, action) => {
     case types.FETCH_ALL_CHATS_SUCCESS:
       return action.payload.chats.map(getChatId);
     case types.CREATE_CHAT_SUCCESS:
-      console.log('CREATE_CHAT_SUCCESS', getChatId(action.payload.chat))
       return [...state, getChatId(action.payload.chat)];
     default:
       return state;
@@ -63,7 +62,7 @@ const byIds = (state = initialState.byIds, action) => {
 };
 
 export default combineReducers({
-  activeId,
+  activeChat,
   allIds,
   myIds,
   byIds
@@ -73,7 +72,8 @@ export default combineReducers({
 export const getChatId = (chat) => chat._id;
 export const getByIds = (state, ids) => {
   return ids.map(id => {
-    console.log('>>> id', state.byIds[id])
     return state.byIds[id]
   });
-}
+};
+
+export const isMember = (memberId, chat) => chat.members.include(memberId);

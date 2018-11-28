@@ -41,12 +41,18 @@ class ChatHeader extends React.Component {
     this.setState({ anchorEl: event.currentTarget });
   };
 
-  handleClose = () => {
+
+  deleteChatHandle = () => {
+    console.log('this.props.activeChat', this.props)
+    this.props.deleteChat(this.props.activeChat)
     this.setState({ anchorEl: null });
   };
 
   render() {
-    const { classes } = this.props;
+    const {
+      classes,
+      chats
+    } = this.props;
     const { anchorEl } = this.state;
     const open = Boolean(anchorEl);
     return (
@@ -55,9 +61,9 @@ class ChatHeader extends React.Component {
             className={classes.appBar}
           >
           <Toolbar className={classes.toolBar}>
-            <Avatar className={classes.toolBarAvatar}>{titleInitials('Jon Lenon Jon Lenon')}</Avatar>
+            <Avatar className={classes.toolBarAvatar}>{titleInitials()}</Avatar>
             <Typography  className={classes.toolBarTitle} variant="title" color="inherit" noWrap>
-              Name
+              wdwqd
               <IconButton
                 aria-label="More"
                 aria-owns={open ? 'long-menu' : null}
@@ -77,7 +83,7 @@ class ChatHeader extends React.Component {
                   },
                 }}
               >
-                <MenuItem  onClick={this.handleClose}>
+                <MenuItem  onClick={this.deleteChatHandle}>
                   Delete
                 </MenuItem>
               </Menu>

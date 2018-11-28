@@ -78,6 +78,7 @@ export function setActiveChat (chatId) {
   return (dispatch) => {
     dispatch(fetchChat(chatId))
       .then((data) => {
+      console.log(data)
         if(!data) {
           dispatch(redirect('/chat'));
 
@@ -85,7 +86,6 @@ export function setActiveChat (chatId) {
             type: types.UNSET_ACTIVE_CHAT
           })
         }
-
         dispatch({
           type: types.SET_ACTIVE_CHAT,
           payload: data
@@ -113,6 +113,32 @@ export function createChat(payload) {
       console.log(err)
       dispatch({
         type: types.CREATE_CHAT_FAILURE,
+        payload: err
+      })
+    })
+  }
+}
+
+export function deleteChat(id) {
+  console.log('deleteChatId', id)
+  return (dispatch, getState) => {
+    const {token} = getState().auth;
+
+    dispatch({
+      type: types.DELETE_CHAT_REQUEST
+    });
+
+    return callApi(`chats/${id}`, token, {method: 'DEL', headers: {'Access-Control-Allow-Methods': 'X-Requested-With'}}).then((data) => {
+      console.log("!!!!!", data)
+      dispatch({
+        type: types.DELETE_CHAT_SUCCESS,
+        payload: data
+      });
+
+      return data;
+    }).catch((err) => {
+      dispatch({
+        type: types.DELETE_CHAT_FAILURE,
         payload: err
       })
     })
