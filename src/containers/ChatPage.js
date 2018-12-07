@@ -4,18 +4,34 @@ import {
   fetchAllChats,
   fetchMyChats,
   setActiveChat,
-  createChat, deleteChat
+  createChat,
+  deleteChat,
+  joinChat,
+  leaveChat,
+  sendMessage,
 } from "../actions/chats";
 import {logout} from "../actions/auth";
 import ChatPage from '../components/ChatPage';
-import * as fromChats from '../reducers/chats'
+import * as fromChats from '../reducers/chats';
 
 
 const matStateToProps = state => {
-  console.log('state.chats.activeId', state)
+  const activeChat = fromChats.getById(state.chats, state.chats.activeId)
+
   return {
-    chats: fromChats.getByIds(state.chats, state.chats.allIds),
-    activeChat: state.chats.activeChat || state.chats.allIds[0]
+    isAuthenticated: state.auth.isAuthenticated,
+    chats: {
+      active: activeChat,
+      my: fromChats.getByIds(state.chats, state.chats.myIds),
+      all: fromChats.getByIds(state.chats, state.chats.allIds),
+    },
+    activeUser: {
+      ...state.auth.user,
+      isMember: fromChats.isMember(state, activeChat),
+      isCreator: fromChats.isCreator(state, activeChat),
+      isChatMember: fromChats.isChatMember(state, activeChat),
+    },
+    messages: state.messages,
   }
 };
 
@@ -25,7 +41,9 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   setActiveChat,
   createChat,
   deleteChat,
-  logout
+  logout,
+  joinChat,
+  sendMessage,
 }, dispatch);
 
 export default connect(

@@ -61,6 +61,8 @@ export function logout () {
 
     return callApi('logout')
       .then((json) => {
+        localStorage.removeItem('token');
+
         dispatch({
           type: types.LOGOUT_SUCCESS,
           payload: json

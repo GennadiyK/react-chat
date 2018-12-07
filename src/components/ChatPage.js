@@ -89,18 +89,23 @@ class ChatPage extends React.Component {
   };
 
   render() {
+    console.log('state||||||', this.props)
     const {
       classes,
       chats,
       logout,
-      activeChat,
+      activeUser,
+      sendMessage,
       setActiveChat,
       deleteChat,
+      joinChat,
     } = this.props;
+
+    console.log('chats', chats)
     return (
       <div className={classes.root}>
         <div className={classes.appFrame}>
-          <ChatHeader showModal={this.handleClickConfirmModal} deleteChat={deleteChat} chats={chats} />
+          <ChatHeader showModal={this.handleClickConfirmModal} deleteChat={deleteChat} activeChat={chats.active} />
           <Drawer
             variant="permanent"
             classes={{
@@ -111,10 +116,18 @@ class ChatPage extends React.Component {
             <Toolbar className={classes.asideToolbar}>
               <SearchField/>
             </Toolbar>
-            <ChatList chats={chats} setActiveChat={setActiveChat} activeChat={activeChat} showCreateChatModal={this.handleClickCreateChatModal}/>
+            <ChatList
+              chats={chats}
+              setActiveChat={setActiveChat}
+              showCreateChatModal={this.handleClickCreateChatModal}
+            />
             <SimpleBottomNavigation/>
           </Drawer>
-          <MessageContainer messages={messages}/>
+          <MessageContainer
+            sendMessage={(content) => sendMessage(chats.active._id, content)}
+            onJoinButtonClick={joinChat}
+            activeUser={activeUser}
+          />
           <Modal
             isOpen={this.state.createChatModalOpen}
             handleClose={this.handleCloseCreateChatModal}

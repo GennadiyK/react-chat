@@ -44,50 +44,63 @@ class ChatHeader extends React.Component {
 
   deleteChatHandle = () => {
     console.log('this.props.activeChat', this.props)
-    this.props.deleteChat(this.props.activeChat)
     this.setState({ anchorEl: null });
   };
+
+  componentWillReceiveProps(nextProps) {
+    console.log('!!!!--->>>nextProps', nextProps)
+  }
 
   render() {
     const {
       classes,
-      chats
+      activeChat
     } = this.props;
     const { anchorEl } = this.state;
     const open = Boolean(anchorEl);
+
     return (
        <AppBar
             position="absolute"
             className={classes.appBar}
           >
           <Toolbar className={classes.toolBar}>
-            <Avatar className={classes.toolBarAvatar}>{titleInitials()}</Avatar>
-            <Typography  className={classes.toolBarTitle} variant="title" color="inherit" noWrap>
-              wdwqd
-              <IconButton
-                aria-label="More"
-                aria-owns={open ? 'long-menu' : null}
-                aria-haspopup="true"
-                color="inherit"
-                onClick={this.handleClick}
-              >
-                <MoreVertIcon />
-              </IconButton>
-              <Menu
-                id="long-menu"
-                anchorEl={anchorEl}
-                open={open}
-                onClose={this.handleClose}
-                PaperProps={{
-                  style: {
-                  },
-                }}
-              >
-                <MenuItem  onClick={this.deleteChatHandle}>
-                  Delete
-                </MenuItem>
-              </Menu>
-            </Typography>
+            { activeChat ? (
+              <React.Fragment>
+                <Avatar className={classes.toolBarAvatar}>{titleInitials(activeChat.title)}</Avatar>
+                <Typography  className={classes.toolBarTitle} variant="title" color="inherit" noWrap>
+                  {activeChat.title}
+                  <IconButton
+                    aria-label="More"
+                    aria-owns={open ? 'long-menu' : null}
+                    aria-haspopup="true"
+                    color="inherit"
+                    onClick={this.handleClick}
+                  >
+                    <MoreVertIcon />
+                  </IconButton>
+                  <Menu
+                    id="long-menu"
+                    anchorEl={anchorEl}
+                    open={open}
+                    onClose={this.handleClose}
+                    PaperProps={{
+                      style: {
+                      },
+                    }}
+                  >
+                    <MenuItem  onClick={this.deleteChatHandle}>
+                      Delete
+                    </MenuItem>
+                  </Menu>
+                </Typography>
+              </React.Fragment>
+              ) : (
+              <Typography  className={classes.toolBarTitle} variant="title" color="inherit" noWrap>
+                React chat
+              </Typography>
+              )
+            }
             <MainMenu showModal={this.props.showModal}/>
           </Toolbar>
        </AppBar>
