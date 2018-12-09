@@ -98,6 +98,7 @@ class ChatPage extends React.Component {
       sendMessage,
       setActiveChat,
       deleteChat,
+      leaveChat,
       joinChat,
     } = this.props;
 
@@ -105,7 +106,13 @@ class ChatPage extends React.Component {
     return (
       <div className={classes.root}>
         <div className={classes.appFrame}>
-          <ChatHeader showModal={this.handleClickConfirmModal} deleteChat={deleteChat} activeChat={chats.active} />
+          <ChatHeader
+            showModal={this.handleClickConfirmModal}
+            deleteChat={deleteChat}
+            leaveChat={leaveChat}
+            activeChat={chats.active}
+            activeUser={activeUser}
+          />
           <Drawer
             variant="permanent"
             classes={{

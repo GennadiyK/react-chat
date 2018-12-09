@@ -41,6 +41,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   setActiveChat,
   createChat,
   deleteChat,
+  leaveChat,
   logout,
   joinChat,
   sendMessage,

@@ -177,7 +177,6 @@ export function leaveChat(id) {
 }
 
 export function deleteChat(id) {
-  console.log('deleteChatId', id)
   return (dispatch, getState) => {
     const {token} = getState().auth;
 
@@ -196,7 +195,7 @@ export function deleteChat(id) {
         type: types.UNSET_ACTIVE_CHAT,
       });
 
-      dispatch(redirect(`/chat`));
+      dispatch(redirect(`chat`));
 
       return data;
     }).catch((err) => {

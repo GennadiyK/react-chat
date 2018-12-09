@@ -37,24 +37,30 @@ class ChatHeader extends React.Component {
     anchorEl: null,
   };
 
-  handleClick = event => {
+  handleClick = (event) => {
     this.setState({ anchorEl: event.currentTarget });
   };
 
-
-  deleteChatHandle = () => {
-    console.log('this.props.activeChat', this.props)
+  handleClose = () => {
     this.setState({ anchorEl: null });
   };
 
-  componentWillReceiveProps(nextProps) {
-    console.log('!!!!--->>>nextProps', nextProps)
-  }
+
+  deleteChatHandle = (id) => {
+    this.handleClose();
+    this.props.deleteChat(id)
+  };
+
+  leaveChatHandle = (id) => {
+    this.handleClose();
+    this.props.leaveChat(id)
+  };
 
   render() {
     const {
       classes,
-      activeChat
+      activeChat,
+      activeUser
     } = this.props;
     const { anchorEl } = this.state;
     const open = Boolean(anchorEl);
@@ -89,9 +95,10 @@ class ChatHeader extends React.Component {
                       },
                     }}
                   >
-                    <MenuItem  onClick={this.deleteChatHandle}>
-                      Delete
-                    </MenuItem>
+                    {activeUser.isMember
+                    && <MenuItem  onClick={() => this.leaveChatHandle(activeChat._id)}>Leave</MenuItem>}
+                    {activeUser.isCreator &&
+                    <MenuItem  onClick={() => this.deleteChatHandle(activeChat._id)}>Delete</MenuItem>}
                   </Menu>
                 </Typography>
               </React.Fragment>

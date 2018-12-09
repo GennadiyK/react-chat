@@ -8,6 +8,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from './Avatar';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
+import {Link} from 'react-router-dom';
 
 
 const styles = theme => ({
@@ -60,10 +61,13 @@ class ChatList extends React.Component {
           {chats.all && chats.all.map((chat, index) =>
             <ListItem
               button
+              component={Link}
               selected={Boolean(this.state.selectedIndex === chat._id)}
+              to={`/chat/${chat._id}`}
               disableGutters={true}
               onClick={(event) => this.handleListItemClick(event, chat._id)}
               className={classes.listItem}
+
               key={index}
             >
 
