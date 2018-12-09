@@ -6,7 +6,7 @@ import Paper from '@material-ui/core/Paper';
 
 const styles = theme => ({
   textFieldPaper: {
-    padding: '16px'
+    padding: '1rem'
   },
 });
 

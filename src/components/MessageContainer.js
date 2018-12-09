@@ -5,6 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import Message from "./Message";
 import MessageInput from "./MessageInput";
+import JoinChat from './joinChat';
 
 const styles = theme => ({
   chatMessageWrap: {
@@ -32,7 +33,6 @@ const styles = theme => ({
   },
   paper: {
     padding: '24px',
-    display: 'none',
   },
   textFieldWrap: {
     left: '320px',
@@ -50,11 +50,16 @@ const styles = theme => ({
 class MessageContainer extends React.Component {
 
   render() {
-    const { classes, messages } = this.props;
+    const {
+      classes,
+      messages,
+      chats,
+      activeUser
+    } = this.props;
 
     return (
       <main className={classes.content}>
-        <Paper className={classes.paper} elevation={1}>
+        {!chats.active && <Paper className={classes.paper} elevation={1}>
           <Typography variant="display1" component="h3" gutterBottom={true}>
             Start messaging…
           </Typography>
@@ -65,14 +70,19 @@ class MessageContainer extends React.Component {
             Use <strong>Recents</strong> to see your recent conversations.
           </Typography>
         </Paper>
-        <div className={classes.chatMessageWrap}>
-          {messages && messages.map((message, index) =>
-            <Message key={index} {...message}/>
-          )}
-        </div>
-        <div className={classes.textFieldWrap}>
-          <MessageInput/>
-        </div>
+        }
+        {
+          messages && <div className={classes.chatMessageWrap}>
+            {messages && messages.map((message, index) =>
+              <Message key={index} {...message}/>
+            )}
+          </div>
+        }
+        {
+          chats.active && <div className={classes.textFieldWrap}>
+            {activeUser.isChatMember ? <MessageInput/> : <JoinChat/>}
+          </div>
+        }
       </main>
     )
   }

@@ -134,6 +134,7 @@ class ChatPage extends React.Component {
             sendMessage={(content) => sendMessage(chats.active._id, content)}
             onJoinButtonClick={joinChat}
             activeUser={activeUser}
+            chats={chats}
           />
           <Modal
             isOpen={this.state.createChatModalOpen}
