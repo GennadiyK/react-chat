@@ -9,11 +9,16 @@ const styles = theme => ({
   },
 });
 
-
-const JoinChat = ({classes}) => {
+const JoinChat = ({classes, onJoinButtonClick}) => {
   return (
     <Paper className={classes.joinChat}>
-      <Button size="large" color="primary" variant="contained"  fullWidth={true}>
+      <Button
+        size="large"
+        color="primary"
+        variant="contained"
+        fullWidth={true}
+        onClick={onJoinButtonClick}
+      >
         JOIN
       </Button>
     </Paper>

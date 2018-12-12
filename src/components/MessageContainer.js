@@ -54,9 +54,10 @@ class MessageContainer extends React.Component {
       classes,
       messages,
       chats,
-      activeUser
+      activeUser,
+      onJoinButtonClick
     } = this.props;
-
+console.log('activeUser', activeUser)
     return (
       <main className={classes.content}>
         {!chats.active && <Paper className={classes.paper} elevation={1}>
@@ -73,14 +74,14 @@ class MessageContainer extends React.Component {
         }
         {
           messages && <div className={classes.chatMessageWrap}>
-            {messages && messages.map((message, index) =>
+            {messages.map((message, index) =>
               <Message key={index} {...message}/>
             )}
           </div>
         }
         {
           chats.active && <div className={classes.textFieldWrap}>
-            {activeUser.isChatMember ? <MessageInput/> : <JoinChat/>}
+            {activeUser.isChatMember ? <MessageInput/> : <JoinChat onJoinButtonClick={() => onJoinButtonClick(chats.active._id)}/>}
           </div>
         }
       </main>

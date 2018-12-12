@@ -89,6 +89,8 @@ export function setActiveChat (chatId) {
           type: types.SET_ACTIVE_CHAT,
           payload: data
         })
+
+        return dispatch(redirect(`/chat/${data.chat._id}`))
       });
 
   }
@@ -129,15 +131,16 @@ export function joinChat(chatId) {
     });
 
     return callApi(`chats/${chatId}/join`, token)
-      .then((data) => {
+      .then(({chat}) => {
+      console.log("data", chat)
         dispatch({
           type: types.JOIN_CHAT_SUCCESS,
-          payload: data
+          payload: chat
         });
 
-        dispatch(redirect(`/chat/${data.chat._id}`));
+        dispatch(redirect(`/chat/${chat._id}`));
 
-        return data;
+        return chat;
       })
       .catch((err) => {
         dispatch({

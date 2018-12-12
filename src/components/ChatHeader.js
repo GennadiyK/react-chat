@@ -76,7 +76,7 @@ class ChatHeader extends React.Component {
                 <Avatar className={classes.toolBarAvatar}>{titleInitials(activeChat.title)}</Avatar>
                 <Typography  className={classes.toolBarTitle} variant="title" color="inherit" noWrap>
                   {activeChat.title}
-                  <IconButton
+                  {activeUser.isChatMember && <IconButton
                     aria-label="More"
                     aria-owns={open ? 'long-menu' : null}
                     aria-haspopup="true"
@@ -85,20 +85,20 @@ class ChatHeader extends React.Component {
                   >
                     <MoreVertIcon />
                   </IconButton>
+                  }
                   <Menu
                     id="long-menu"
                     anchorEl={anchorEl}
                     open={open}
                     onClose={this.handleClose}
                     PaperProps={{
-                      style: {
-                      },
+                      style: {},
                     }}
                   >
                     {activeUser.isMember
-                    && <MenuItem  onClick={() => this.leaveChatHandle(activeChat._id)}>Leave</MenuItem>}
+                    && <MenuItem onClick={() => this.leaveChatHandle(activeChat._id)}>Leave</MenuItem>}
                     {activeUser.isCreator &&
-                    <MenuItem  onClick={() => this.deleteChatHandle(activeChat._id)}>Delete</MenuItem>}
+                    <MenuItem onClick={() => this.deleteChatHandle(activeChat._id)}>Delete</MenuItem>}
                   </Menu>
                 </Typography>
               </React.Fragment>
