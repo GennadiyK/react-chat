@@ -49,6 +49,10 @@ const styles = theme => ({
 
 class MessageContainer extends React.Component {
 
+  componentWillReceiveProps(nextProps) {
+    console.log('componentWillReceiveProps', nextProps)
+  }
+
   render() {
     const {
       classes,
@@ -57,7 +61,7 @@ class MessageContainer extends React.Component {
       activeUser,
       onJoinButtonClick
     } = this.props;
-console.log('activeUser', activeUser)
+
     return (
       <main className={classes.content}>
         {!chats.active && <Paper className={classes.paper} elevation={1}>

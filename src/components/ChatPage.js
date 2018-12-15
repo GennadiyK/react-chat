@@ -89,7 +89,6 @@ class ChatPage extends React.Component {
   };
 
   render() {
-    console.log('state||||||', this.props)
     const {
       classes,
       chats,
@@ -102,7 +101,6 @@ class ChatPage extends React.Component {
       joinChat,
     } = this.props;
 
-    console.log('chats', chats)
     return (
       <div className={classes.root}>
         <div className={classes.appFrame}>

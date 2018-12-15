@@ -130,19 +130,17 @@ export function joinChat(chatId) {
       type: types.JOIN_CHAT_REQUEST
     });
 
-    return callApi(`chats/${chatId}/join`, token)
-      .then(({chat}) => {
-      console.log("data", chat)
+    return callApi(`chats/${chatId}/join`, token).then((data) => {
+      console.log('data', data)
         dispatch({
           type: types.JOIN_CHAT_SUCCESS,
-          payload: chat
+          payload: data
         });
 
-        dispatch(redirect(`/chat/${chat._id}`));
+        dispatch(redirect(`/chat/${data.chat._id}`));
 
-        return chat;
-      })
-      .catch((err) => {
+        return data;
+      }).catch((err) => {
         dispatch({
           type: types.JOIN_CHAT_FAILURE,
           payload: err

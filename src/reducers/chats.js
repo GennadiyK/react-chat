@@ -11,7 +11,6 @@ const initialState = {
 const  activeId  = (state = initialState.activeId, action) => {
   switch (action.type) {
     case types.SET_ACTIVE_CHAT:
-      return getChatId(action.payload.chat);
     case types.JOIN_CHAT_SUCCESS:
       return getChatId(action.payload.chat);
     case types.UNSET_ACTIVE_CHAT:
@@ -27,9 +26,6 @@ const allIds = (state = initialState.allIds, action) => {
       return action.payload.chats.map(getChatId);
     case types.CREATE_CHAT_SUCCESS:
       return [...state, getChatId(action.payload.chat)];
-    case types.JOIN_CHAT_SUCCESS:
-    case types.LEAVE_CHAT_SUCCESS:
-      return state;
     case types.DELETE_CHAT_SUCCESS:
       return state.filter((chatId) => chatId !== getChatId(action.payload.chat))
     default:
@@ -64,13 +60,12 @@ const byIds = (state = initialState.byIds, action) => {
         }, {})
       };
     case types.CREATE_CHAT_SUCCESS:
+    case types.JOIN_CHAT_SUCCESS:
+    case types.LEAVE_CHAT_SUCCESS:
       return {
         ...state,
         [getChatId(action.payload.chat)]: action.payload.chat,
       };
-    case types.JOIN_CHAT_SUCCESS:
-    case types.LEAVE_CHAT_SUCCESS:
-      return state;
     case types.DELETE_CHAT_SUCCESS:
       const newState = {...state };
       delete newState[getChatId(action.payload.chat)]
@@ -103,7 +98,6 @@ export const isMember = (state, chat) => {
   try {
     return chat.members.some(
       member => {
-        console.log('getUserId(member) === getUserId(getActiveUser(state))', getUserId(member) === getUserId(getActiveUser(state)))
         return getUserId(member) === getUserId(getActiveUser(state))
       }
     )
