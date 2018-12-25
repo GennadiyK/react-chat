@@ -15,6 +15,7 @@ const styles = theme => ({
   root: {
     flexGrow: 1,
     overflow: 'auto',
+    height: '100%',
     width: '100%',
     maxWidth: 360,
     backgroundColor: theme.palette.background.paper,

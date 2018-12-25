@@ -2,7 +2,10 @@ import React from 'react'
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import { Toolbar, TextField, Drawer } from '@material-ui/core/';
-import SimpleBottomNavigation from './BottomNavigation';
+import BottomNavigation from '@material-ui/core/BottomNavigation';
+import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
+import RestoreIcon from '@material-ui/icons/Restore';
+import ExploreIcon from '@material-ui/icons/Explore';
 import ChatList from "./ChatList";
 import SearchField from "./SearchField";
 import ChatHeader from "./ChatHeader";
@@ -41,7 +44,8 @@ class ChatPage extends React.Component {
   state = {
     confirmModalOpen: false,
     createChatModalOpen: false,
-    chatName: null
+    chatName: null,
+    activeTab: 0,
   };
 
   componentDidMount() {
@@ -88,6 +92,12 @@ class ChatPage extends React.Component {
     this.handleCloseCreateChatModal()
   };
 
+  handleChange = (event, value) => {
+    this.setState({
+      activeTab: value,
+    });
+  };
+
   render() {
     const {
       classes,
@@ -101,6 +111,7 @@ class ChatPage extends React.Component {
       joinChat,
     } = this.props;
 
+    const { activeTab } = this.state;
     return (
       <div className={classes.root}>
         <div className={classes.appFrame}>
@@ -126,7 +137,15 @@ class ChatPage extends React.Component {
               setActiveChat={setActiveChat}
               showCreateChatModal={this.handleClickCreateChatModal}
             />
-            <SimpleBottomNavigation/>
+            <BottomNavigation
+              value={activeTab}
+              onChange={this.handleChange}
+              showLabels
+              className={classes.root}
+            >
+              <BottomNavigationAction label="My chats" icon={<RestoreIcon />} />
+              <BottomNavigationAction label="Explore" icon={<ExploreIcon />} />
+            </BottomNavigation>
           </Drawer>
           <MessageContainer
             sendMessage={(content) => sendMessage(chats.active._id, content)}
