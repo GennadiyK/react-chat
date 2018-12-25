@@ -235,3 +235,12 @@ export function sendMessage(chatId, payload) {
     })
   }
 }
+
+export function searchChat(searchValue) {
+  return (dispatch) => {
+    dispatch({
+      type: types.SEARCH_CHAT,
+      payload: searchValue.toLowerCase()
+    })
+  }
+}

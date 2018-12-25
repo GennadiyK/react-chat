@@ -32,3 +32,5 @@ export const SEND_MESSAGE_FAILURE = 'chats/SEND_MESSAGE_FAILURE';
 
 export const SET_ACTIVE_CHAT = 'chats/SET_ACTIVE_CHAT';
 export const UNSET_ACTIVE_CHAT = 'chats/UNSET_ACTIVE_CHAT';
+
+export const SEARCH_CHAT = 'chats/SEARCH_CHAT';

@@ -109,6 +109,7 @@ class ChatPage extends React.Component {
       deleteChat,
       leaveChat,
       joinChat,
+      searchChat
     } = this.props;
 
     const { activeTab } = this.state;
@@ -130,7 +131,7 @@ class ChatPage extends React.Component {
             anchor="left"
           >
             <Toolbar className={classes.asideToolbar}>
-              <SearchField/>
+              <SearchField searchChat={searchChat}/>
             </Toolbar>
             <ChatList
               chats={chats}

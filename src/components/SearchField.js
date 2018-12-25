@@ -16,6 +16,9 @@ const styles = theme => ({
 
 
 class SearchField extends React.Component {
+  handleSearch = (e) => {
+    this.props.searchChat(e.target.value)
+  }
   render() {
     const { classes } = this.props;
 
@@ -28,6 +31,7 @@ class SearchField extends React.Component {
           InputLabelProps={{
             shrink: true,
           }}
+          onChange={this.handleSearch}
         />
       </form>
     );

@@ -5,7 +5,8 @@ const initialState = {
   activeId: null,
   allIds: [],
   myIds: [],
-  byIds:{},
+  byIds: {},
+  searchValue: '',
 };
 
 const  activeId  = (state = initialState.activeId, action) => {
@@ -75,11 +76,23 @@ const byIds = (state = initialState.byIds, action) => {
   }
 };
 
+const searchValue = (state = initialState.searchValue, action) => {
+  switch (action.type) {
+    case types.SEARCH_CHAT:
+      console.log('searchValue', action.payload)
+      return action.payload
+
+    default:
+      return state;
+  }
+};
+
 export default combineReducers({
   activeId,
   allIds,
   myIds,
-  byIds
+  byIds,
+  searchValue,
 })
 
 

@@ -9,21 +9,25 @@ import {
   joinChat,
   leaveChat,
   sendMessage,
+  searchChat,
 } from "../actions/chats";
 import {logout} from "../actions/auth";
 import ChatPage from '../components/ChatPage';
 import * as fromChats from '../reducers/chats';
+import { filterChats } from '../utils/filter';
 
 
 const matStateToProps = state => {
-  const activeChat = fromChats.getById(state.chats, state.chats.activeId)
+  const activeChat = fromChats.getById(state.chats, state.chats.activeId);
+  const chatsMy = fromChats.getByIds(state.chats, state.chats.myIds);
+  const chatsAll = fromChats.getByIds(state.chats, state.chats.allIds);
 
   return {
     isAuthenticated: state.auth.isAuthenticated,
     chats: {
       active: activeChat,
-      my: fromChats.getByIds(state.chats, state.chats.myIds),
-      all: fromChats.getByIds(state.chats, state.chats.allIds),
+      my: filterChats(chatsMy, state.chats.searchValue),
+      all: filterChats(chatsAll, state.chats.searchValue),
     },
     activeUser: {
       ...state.auth.user,
@@ -45,6 +49,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   logout,
   joinChat,
   sendMessage,
+  searchChat,
 }, dispatch);
 
 export default connect(
