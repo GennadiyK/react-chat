@@ -79,9 +79,7 @@ const byIds = (state = initialState.byIds, action) => {
 const searchValue = (state = initialState.searchValue, action) => {
   switch (action.type) {
     case types.SEARCH_CHAT:
-      console.log('searchValue', action.payload)
-      return action.payload
-
+      return action.payload.searchValue;
     default:
       return state;
   }

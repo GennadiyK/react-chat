@@ -48,18 +48,14 @@ const styles = theme => ({
 
 
 class MessageContainer extends React.Component {
-
-  componentWillReceiveProps(nextProps) {
-    console.log('componentWillReceiveProps', nextProps)
-  }
-
   render() {
     const {
       classes,
       messages,
       chats,
       activeUser,
-      onJoinButtonClick
+      onJoinButtonClick,
+      sendMessage,
     } = this.props;
 
     return (
@@ -85,7 +81,10 @@ class MessageContainer extends React.Component {
         }
         {
           chats.active && <div className={classes.textFieldWrap}>
-            {activeUser.isChatMember ? <MessageInput/> : <JoinChat onJoinButtonClick={() => onJoinButtonClick(chats.active._id)}/>}
+            {activeUser.isChatMember ?
+              <MessageInput sendMessage={sendMessage}/> :
+              <JoinChat onJoinButtonClick={() => onJoinButtonClick(chats.active._id)}/>
+            }
           </div>
         }
       </main>

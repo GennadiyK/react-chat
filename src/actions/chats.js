@@ -217,14 +217,14 @@ export function sendMessage(chatId, payload) {
       type: types.SEND_MESSAGE_REQUEST
     });
 
-    return callApi(`chats/${chatId}`, token, {method: 'POST'}, payload).then((data) => {
+    return callApi(`chats/${chatId}`, token, {method: 'POST'}, { data: payload}).then((data) => {
 
       dispatch({
         type: types.SEND_MESSAGE_SUCCESS,
         payload: data
       });
 
-      dispatch(fetchChat(chatId))
+      dispatch(fetchChat(chatId));
 
       return data;
     }).catch((err) => {
@@ -240,7 +240,7 @@ export function searchChat(searchValue) {
   return (dispatch) => {
     dispatch({
       type: types.SEARCH_CHAT,
-      payload: searchValue.toLowerCase()
+      payload: {searchValue: searchValue.toLowerCase()}
     })
   }
 }
