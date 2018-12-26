@@ -134,7 +134,7 @@ class ChatPage extends React.Component {
               <SearchField searchChat={searchChat}/>
             </Toolbar>
             <ChatList
-              chats={chats}
+              chats={activeTab === 0 ? chats.my : chats.all}
               setActiveChat={setActiveChat}
               showCreateChatModal={this.handleClickCreateChatModal}
             />

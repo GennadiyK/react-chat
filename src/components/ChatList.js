@@ -59,7 +59,7 @@ class ChatList extends React.Component {
     return (
       <div className={classes.root}>
         <List component="nav">
-          {chats.all && chats.all.map((chat, index) =>
+          {chats && chats.map((chat, index) =>
             <ListItem
               button
               component={Link}
