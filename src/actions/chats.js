@@ -217,8 +217,7 @@ export function sendMessage(chatId, payload) {
       type: types.SEND_MESSAGE_REQUEST
     });
 
-    return callApi(`chats/${chatId}`, token, {method: 'POST'}, { data: payload}).then((data) => {
-
+    return callApi(`chats/${chatId}`, token, {method: 'POST'}, { data: {content: payload}}).then((data) => {
       dispatch({
         type: types.SEND_MESSAGE_SUCCESS,
         payload: data
