@@ -220,7 +220,9 @@ export function sendMessage(chatId, payload) {
     return callApi(`chats/${chatId}`, token, {method: 'POST'}, { data: {content: payload}}).then((data) => {
       dispatch({
         type: types.SEND_MESSAGE_SUCCESS,
-        payload: data
+        payload: {
+          message: data.message
+        }
       });
 
       dispatch(fetchChat(chatId));

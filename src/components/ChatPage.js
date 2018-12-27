@@ -109,7 +109,8 @@ class ChatPage extends React.Component {
       deleteChat,
       leaveChat,
       joinChat,
-      searchChat
+      searchChat,
+      messages,
     } = this.props;
 
     const { activeTab } = this.state;
@@ -153,6 +154,7 @@ class ChatPage extends React.Component {
             onJoinButtonClick={joinChat}
             activeUser={activeUser}
             chats={chats}
+            messages={messages}
           />
           <Modal
             isOpen={this.state.createChatModalOpen}

@@ -73,9 +73,11 @@ class MessageContainer extends React.Component {
         </Paper>
         }
         {
-          messages && <div className={classes.chatMessageWrap}>
-            {messages.map((message, index) =>
-              <Message key={index} {...message}/>
+          messages.length > 0 && <div className={classes.chatMessageWrap}>
+            {messages.map((message, index) => {
+                return <Message key={index} {...message}/>
+            }
+
             )}
           </div>
         }

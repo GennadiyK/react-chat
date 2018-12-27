@@ -31,7 +31,4 @@ export default function colorFrom(string) {
   } catch (err) {
      return blueGrey[500]
   }
-
-
-
 }
