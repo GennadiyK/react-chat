@@ -131,13 +131,13 @@ export function joinChat(chatId) {
     });
 
     return callApi(`chats/${chatId}/join`, token).then((data) => {
-      console.log('data', data)
         dispatch({
           type: types.JOIN_CHAT_SUCCESS,
           payload: data
         });
 
         dispatch(redirect(`/chat/${data.chat._id}`));
+        dispatch(fetchChat(chatId));
 
         return data;
       }).catch((err) => {
@@ -149,7 +149,7 @@ export function joinChat(chatId) {
   }
 }
 
-export function leaveChat(id) {
+export function leaveChat(chatId) {
   return (dispatch, getState) => {
     const {token} = getState().auth;
 
@@ -157,7 +157,7 @@ export function leaveChat(id) {
       type: types.LEAVE_CHAT_REQUEST
     });
 
-    return callApi(`chats/${id}/leave`, token).then((data) => {
+    return callApi(`chats/${chatId}/leave`, token).then((data) => {
       dispatch({
         type: types.LEAVE_CHAT_SUCCESS,
         payload: data
