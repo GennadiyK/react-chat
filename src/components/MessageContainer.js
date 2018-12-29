@@ -73,9 +73,9 @@ class MessageContainer extends React.Component {
         </Paper>
         }
         {
-          Boolean(messages.length) && chats.active && <div className={classes.chatMessageWrap}>
+          Boolean(messages.length) && Boolean(chats.active) && <div className={classes.chatMessageWrap}>
             {messages.map((message, index) => {
-                return <Message key={index} {...message}/>
+                return <Message key={index} {...message} activeUser={activeUser}/>
             }
             )}
           </div>

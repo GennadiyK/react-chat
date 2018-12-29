@@ -18,7 +18,7 @@ import { filterChats } from '../utils/filter';
 
 
 const matStateToProps = state => {
-  const activeChat = fromChats.getById(state.chats, state.chats.activeId);
+  const activeChat = fromChats.getById(state.chats, state.chats.activeId) || null;
   const chatsMy = fromChats.getByIds(state.chats, state.chats.myIds);
   const chatsAll = fromChats.getByIds(state.chats, state.chats.allIds);
 

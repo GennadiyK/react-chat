@@ -5,6 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import Typography from '@material-ui/core/Typography'
 import Avatar from './Avatar';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
@@ -35,7 +36,7 @@ const styles = theme => ({
     marginLeft: 0,
     marginBottom: 0,
     marginRight: 10,
-  }
+  },
 });
 
 class ChatList extends React.Component {
@@ -59,7 +60,7 @@ class ChatList extends React.Component {
     return (
       <div className={classes.root}>
         <List component="nav">
-          {chats && chats.map((chat, index) =>
+          {chats && chats.length ? (chats.map((chat, index) =>
             <ListItem
               button
               component={Link}
@@ -75,7 +76,10 @@ class ChatList extends React.Component {
               <Avatar className={classNames(classes.listItemAvatar)} colorFrom={chat.title}>{chat.title}</Avatar>
               <ListItemText primary={chat.title} secondary={chat.date}/>
             </ListItem>
-          )}
+          )) :
+            <Typography variant="subheading" align="center">
+              There is no chats yet....
+            </Typography>}
         </List>
         <Button variant="fab" color="primary" aria-label="Add" className={classes.addButton} onClick={showCreateChatModal}>
           <AddIcon />

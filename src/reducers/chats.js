@@ -16,6 +16,7 @@ const  activeId  = (state = initialState.activeId, action) => {
       return getChatId(action.payload.chat);
     case types.UNSET_ACTIVE_CHAT:
     case types.DELETE_CHAT_SUCCESS:
+    case types.LOGOUT_SUCCESS:
       return null;
     default:
       return state;

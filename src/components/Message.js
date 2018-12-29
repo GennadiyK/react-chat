@@ -40,8 +40,15 @@ const styles = theme => ({
  */
 class Message extends React.Component {
     render() {
-       const {classes, sender, content, statusMessage, createdAt} = this.props;
-        console.log('statusMessage', this.props.statusMessage)
+       const {
+         classes,
+         sender,
+         content,
+         statusMessage,
+         createdAt,
+         activeUser,
+       } = this.props;
+
       if(statusMessage) {
           return (
             <div className={classes.statusMessage}>
@@ -61,20 +68,20 @@ class Message extends React.Component {
           )
       }
        return (
-            <div className={sender === 'me' ? classNames(classes.chatMessage, classes.chatMessageMe) : classes.chatMessage}>
-                <Avatar colorFrom={sender._id}>{titleInitials(sender.username)}</Avatar>
-                <Paper className={classes.chatMessageInner} elevation={3}>
-                    <Typography  variant="caption" component="span"  style={{ color: randomColor(sender._id)}} >
-                        {sender.username}
-                    </Typography>
-                    <Typography  variant={'body2'} component="p">
-                        {content}
-                    </Typography>
-                    <Typography variant={'caption'} component="span">
-                        a few seconds ago
-                    </Typography>
-                </Paper>
-            </div>
+          <div className={sender._id === activeUser._id ? classNames(classes.chatMessage, classes.chatMessageMe) : classes.chatMessage}>
+              <Avatar colorFrom={sender._id}>{titleInitials(sender.username)}</Avatar>
+              <Paper className={classes.chatMessageInner} elevation={3}>
+                  <Typography  variant="caption" component="span"  style={{ color: randomColor(sender._id)}} >
+                      {sender.username}
+                  </Typography>
+                  <Typography  variant={'body2'} component="p">
+                    {content}
+                  </Typography>
+                  <Typography variant={'caption'} component="span">
+                    {moment(createdAt).fromNow()}
+                  </Typography>
+              </Paper>
+          </div>
        )
     }
 }
