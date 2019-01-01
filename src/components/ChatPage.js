@@ -12,6 +12,7 @@ import ChatHeader from "./ChatHeader";
 import MessageContainer from "./MessageContainer";
 import { messages } from '../mock-data'
 import Modal from "./Modal";
+import {mountChat, unmountChat} from "../actions/sockets";
 
 const styles = theme => ({
   root: {
@@ -50,14 +51,35 @@ class ChatPage extends React.Component {
 
   componentDidMount() {
     const {
+      match,
       fetchAllChats,
       fetchMyChats,
+      socketsConnect,
     } = this.props;
 
     Promise.all([
       fetchAllChats(),
       fetchMyChats(),
-    ]);
+    ]).then(() => {
+      socketsConnect();
+    }).then(() => {
+      const { chatId } = match.params;
+
+      if( chatId ) {
+        mountChat(chatId);
+      }
+
+    });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { match: {params}, unmountChat, mountChat } = this.props;
+    const {params: nextParams} = nextProps.match;
+
+    if(nextParams.chatId && params.chatId !==  nextParams.chatId) {
+      unmountChat(params.chatId);
+      mountChat(nextParams.chatId);
+    }
   }
 
   handleClickConfirmModal = () => {
@@ -150,7 +172,7 @@ class ChatPage extends React.Component {
             </BottomNavigation>
           </Drawer>
           <MessageContainer
-            sendMessage={(content) => sendMessage(chats.active._id, content)}
+            sendMessage={sendMessage}
             onJoinButtonClick={joinChat}
             activeUser={activeUser}
             chats={chats}

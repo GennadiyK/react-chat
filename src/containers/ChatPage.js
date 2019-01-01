@@ -8,9 +8,14 @@ import {
   deleteChat,
   joinChat,
   leaveChat,
-  sendMessage,
   searchChat,
 } from "../actions/chats";
+import {
+  sendMessage,
+  mountChat,
+  unmountChat,
+  socketsConnect,
+} from '../actions/sockets';
 import {logout} from "../actions/auth";
 import ChatPage from '../components/ChatPage';
 import * as fromChats from '../reducers/chats';
@@ -50,6 +55,9 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   joinChat,
   sendMessage,
   searchChat,
+  mountChat,
+  unmountChat,
+  socketsConnect,
 }, dispatch);
 
 export default connect(

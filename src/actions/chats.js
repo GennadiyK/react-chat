@@ -209,33 +209,33 @@ export function deleteChat(id) {
 }
 
 
-export function sendMessage(chatId, payload) {
-  return (dispatch, getState) => {
-    const {token} = getState().auth;
-
-    dispatch({
-      type: types.SEND_MESSAGE_REQUEST
-    });
-
-    return callApi(`chats/${chatId}`, token, {method: 'POST'}, { data: {content: payload}}).then((data) => {
-      dispatch({
-        type: types.SEND_MESSAGE_SUCCESS,
-        payload: {
-          message: data.message
-        }
-      });
-
-      dispatch(fetchChat(chatId));
-
-      return data;
-    }).catch((err) => {
-      dispatch({
-        type: types.SEND_MESSAGE_FAILURE,
-        payload: err
-      })
-    })
-  }
-}
+// export function sendMessage(chatId, payload) {
+//   return (dispatch, getState) => {
+//     const {token} = getState().auth;
+//
+//     dispatch({
+//       type: types.SEND_MESSAGE_REQUEST
+//     });
+//
+//     return callApi(`chats/${chatId}`, token, {method: 'POST'}, { data: {content: payload}}).then((data) => {
+//       dispatch({
+//         type: types.SEND_MESSAGE_SUCCESS,
+//         payload: {
+//           message: data.message
+//         }
+//       });
+//
+//       dispatch(fetchChat(chatId));
+//
+//       return data;
+//     }).catch((err) => {
+//       dispatch({
+//         type: types.SEND_MESSAGE_FAILURE,
+//         payload: err
+//       })
+//     })
+//   }
+// }
 
 export function searchChat(searchValue) {
   return (dispatch) => {
