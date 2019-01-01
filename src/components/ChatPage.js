@@ -1,14 +1,18 @@
 import React from 'react'
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
-import Drawer from '@material-ui/core/Drawer';
-import Toolbar from '@material-ui/core/Toolbar';
-import SimpleBottomNavigation from './BottomNavigation';
+import { Toolbar, TextField, Drawer } from '@material-ui/core/';
+import BottomNavigation from '@material-ui/core/BottomNavigation';
+import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
+import RestoreIcon from '@material-ui/icons/Restore';
+import ExploreIcon from '@material-ui/icons/Explore';
 import ChatList from "./ChatList";
 import SearchField from "./SearchField";
 import ChatHeader from "./ChatHeader";
 import MessageContainer from "./MessageContainer";
-import { chats, messages } from '../mock-data'
+import { messages } from '../mock-data'
+import Modal from "./Modal";
+import {mountChat, unmountChat} from "../actions/sockets";
 
 const styles = theme => ({
   root: {
@@ -38,12 +42,110 @@ const styles = theme => ({
 
 
 class ChatPage extends React.Component {
+  state = {
+    confirmModalOpen: false,
+    createChatModalOpen: false,
+    chatName: null,
+    activeTab: 0,
+  };
+
+  componentDidMount() {
+    const {
+      match,
+      fetchAllChats,
+      fetchMyChats,
+      socketsConnect,
+    } = this.props;
+
+    Promise.all([
+      fetchAllChats(),
+      fetchMyChats(),
+    ]).then(() => {
+      socketsConnect();
+    }).then(() => {
+      const { chatId } = match.params;
+
+      if( chatId ) {
+        mountChat(chatId);
+      }
+
+    });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { match: {params}, unmountChat, mountChat } = this.props;
+    const {params: nextParams} = nextProps.match;
+
+    if(nextParams.chatId && params.chatId !==  nextParams.chatId) {
+      unmountChat(params.chatId);
+      mountChat(nextParams.chatId);
+    }
+  }
+
+  handleClickConfirmModal = () => {
+    this.setState({ confirmModalOpen: true });
+  };
+
+  handleClickCreateChatModal = () => {
+    this.setState({ createChatModalOpen: true });
+  };
+
+  handleCloseConfirmModal = () => {
+    this.setState({ confirmModalOpen: false });
+  };
+
+  handleCloseCreateChatModal = () => {
+    this.setState({ createChatModalOpen: false });
+  };
+
+  handleChangeNewChatField = (event) => {
+    this.setState({
+      chatName: event.target.value
+    })
+  }
+
+  handleCreateChat = () => {
+    this.props.createChat({
+      data:{
+        title: this.state.chatName
+      }
+    })
+
+    this.handleCloseCreateChatModal()
+  };
+
+  handleChange = (event, value) => {
+    this.setState({
+      activeTab: value,
+    });
+  };
+
   render() {
-    const {classes} = this.props;
+    const {
+      classes,
+      chats,
+      logout,
+      activeUser,
+      sendMessage,
+      setActiveChat,
+      deleteChat,
+      leaveChat,
+      joinChat,
+      searchChat,
+      messages,
+    } = this.props;
+
+    const { activeTab } = this.state;
     return (
       <div className={classes.root}>
         <div className={classes.appFrame}>
-          <ChatHeader/>
+          <ChatHeader
+            showModal={this.handleClickConfirmModal}
+            deleteChat={deleteChat}
+            leaveChat={leaveChat}
+            activeChat={chats.active}
+            activeUser={activeUser}
+          />
           <Drawer
             variant="permanent"
             classes={{
@@ -52,12 +154,54 @@ class ChatPage extends React.Component {
             anchor="left"
           >
             <Toolbar className={classes.asideToolbar}>
-              <SearchField/>
+              <SearchField searchChat={searchChat}/>
             </Toolbar>
-            <ChatList chats={chats}/>
-            <SimpleBottomNavigation/>
+            <ChatList
+              chats={activeTab === 0 ? chats.my : chats.all}
+              setActiveChat={setActiveChat}
+              showCreateChatModal={this.handleClickCreateChatModal}
+            />
+            <BottomNavigation
+              value={activeTab}
+              onChange={this.handleChange}
+              showLabels
+              className={classes.root}
+            >
+              <BottomNavigationAction label="My chats" icon={<RestoreIcon />} />
+              <BottomNavigationAction label="Explore" icon={<ExploreIcon />} />
+            </BottomNavigation>
           </Drawer>
-          <MessageContainer messages={messages}/>
+          <MessageContainer
+            sendMessage={sendMessage}
+            onJoinButtonClick={joinChat}
+            activeUser={activeUser}
+            chats={chats}
+            messages={messages}
+          />
+          <Modal
+            isOpen={this.state.createChatModalOpen}
+            handleClose={this.handleCloseCreateChatModal}
+            handleConfirm={this.handleCreateChat}
+            title={'Create new chat'}
+          >
+            <TextField
+              id="standard-textarea"
+              label="New Chat"
+              placeholder="Type the title..."
+              multiline
+              className={classes.textField}
+              margin="normal"
+              onChange={this.handleChangeNewChatField}
+            />
+          </Modal>
+          <Modal
+            isOpen={this.state.confirmModalOpen}
+            handleClose={this.handleCloseConfirmModal}
+            handleConfirm={logout}
+            title={'Confirm logout'}
+          >
+            <p>Do you want to logout?</p>
+          </Modal>
         </div>
       </div>
     )

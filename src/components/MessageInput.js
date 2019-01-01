@@ -6,12 +6,30 @@ import Paper from '@material-ui/core/Paper';
 
 const styles = theme => ({
   textFieldPaper: {
-    padding: '16px'
+    padding: '1rem'
   },
 });
 
 
 class MessageInput extends React.Component {
+  state = {
+    value: ''
+  };
+
+  handleValueChange = (e) => {
+    this.setState({value: e.target.value})
+  };
+
+  handleSendMessage = (e) => {
+    const { value } = this.state;
+
+    if (e.key === 'Enter' && value) {
+      this.props.sendMessage(value);
+      this.setState({
+        value: ''
+      });
+    }
+  };
 
   render() {
     const { classes } = this.props;
@@ -25,6 +43,9 @@ class MessageInput extends React.Component {
           InputLabelProps={{
             shrink: true,
           }}
+          value={this.state.value}
+          onChange={this.handleValueChange}
+          onKeyPress={this.handleSendMessage}
         />
       </Paper>
     )
