@@ -10,9 +10,7 @@ import ChatList from "./ChatList";
 import SearchField from "./SearchField";
 import ChatHeader from "./ChatHeader";
 import MessageContainer from "./MessageContainer";
-import { messages } from '../mock-data'
 import Modal from "./Modal";
-import {mountChat, unmountChat} from "../actions/sockets";
 
 const styles = theme => ({
   root: {
@@ -55,6 +53,7 @@ class ChatPage extends React.Component {
       fetchAllChats,
       fetchMyChats,
       socketsConnect,
+      mountChat,
     } = this.props;
 
     Promise.all([

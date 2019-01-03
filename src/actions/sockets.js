@@ -44,7 +44,7 @@ export function socketsConnect () {
 
     socket.on('new-message', (message) => {
       dispatch({
-        type: types.SEND_MESSAGE,
+        type: types.RECEIVE_MESSAGE,
         payload: message,
       })
     });
@@ -69,7 +69,6 @@ export function socketsConnect () {
 }
 
 export function sendMessage (content) {
-  console.log(content)
   return (dispatch, getState) => {
     const { activeId } = getState().chats;
     if(!socket) {
@@ -89,9 +88,10 @@ export function sendMessage (content) {
           payload: {
             chatId: activeId,
             content,
-          }
-        })
-      })
+          },
+        });
+      },
+    );
   }
 }
 
