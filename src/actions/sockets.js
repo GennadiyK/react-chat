@@ -1,7 +1,6 @@
 import SocketIOClient from 'socket.io-client';
 import * as types from '../constants';
 import { redirect } from './services';
-import chats from "../reducers/chats";
 
 export function missingSocketConnection () {
   return {
@@ -13,6 +12,12 @@ let socket = null;
 
 export function socketsConnect () {
   return (dispatch, getState) => {
+    const { isFetching } = getState().services;
+
+    if(isFetching.sockets) {
+      return Promise.resolve();
+    }
+
     const { token } = getState().auth;
     dispatch({
       type: types.SOCKET_CONNECTION_REQUEST
@@ -82,7 +87,6 @@ export function sendMessage (content) {
         content,
       },
       () => {
-        console.log('dispatch SEND_MESSAGE');
         dispatch({
           type: types.SEND_MESSAGE,
           payload: {

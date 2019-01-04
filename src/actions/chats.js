@@ -4,6 +4,12 @@ import * as types from '../constants'
 
 export function fetchMyChats () {
   return (dispatch, getState) => {
+    const { isFetching } = getState().services;
+
+    if(isFetching.myChats) {
+      return Promise.resolve();
+    }
+
     const {token} = getState().auth;
     dispatch({
       type: types.FETCH_MY_CHATS_REQUEST
@@ -27,6 +33,12 @@ export function fetchMyChats () {
 
 export function fetchAllChats () {
   return (dispatch, getState) => {
+    const { isFetching } = getState().services;
+
+    if(isFetching.allChats) {
+      return Promise.resolve();
+    }
+
     const {token} = getState().auth;
     dispatch({
       type: types.FETCH_ALL_CHATS_REQUEST
@@ -52,6 +64,12 @@ export function fetchAllChats () {
 
 export function fetchChat (chatId) {
   return (dispatch, getState) => {
+    const { isFetching } = getState().services;
+
+    if(isFetching.chat) {
+      return Promise.resolve();
+    }
+
     const {token} = getState().auth;
     dispatch({
       type: types.FETCH_CHAT_REQUEST
@@ -98,6 +116,12 @@ export function setActiveChat (chatId) {
 
 export function createChat(payload) {
   return (dispatch, getState) => {
+    const { isFetching } = getState().services;
+
+    if(isFetching.createChat) {
+      return Promise.resolve();
+    }
+
     const {token} = getState().auth;
     dispatch({
       type: types.CREATE_CHAT_REQUEST
@@ -124,6 +148,12 @@ export function createChat(payload) {
 
 export function joinChat(chatId) {
   return (dispatch, getState) => {
+    const { isFetching } = getState().services;
+
+    if(isFetching.joinChat) {
+      return Promise.resolve();
+    }
+
     const {token} = getState().auth;
 
     dispatch({
@@ -151,6 +181,12 @@ export function joinChat(chatId) {
 
 export function leaveChat(chatId) {
   return (dispatch, getState) => {
+    const { isFetching } = getState().services;
+
+    if(isFetching.leaveChat) {
+      return Promise.resolve();
+    }
+
     const {token} = getState().auth;
 
     dispatch({
@@ -179,6 +215,12 @@ export function leaveChat(chatId) {
 
 export function deleteChat(id) {
   return (dispatch, getState) => {
+    const { isFetching } = getState().services;
+
+    if(isFetching.deleteChat) {
+      return Promise.resolve();
+    }
+
     const {token} = getState().auth;
 
     dispatch({
