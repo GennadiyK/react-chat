@@ -108,7 +108,6 @@ export const isCreator = (state, chat) => {
   try {
     return getUserId(chat.creator) === getUserId(getActiveUser(state));
   } catch (err) {
-    console.log(err);
     return false;
   }
 };
@@ -121,7 +120,6 @@ export const isMember = (state, chat) => {
       }
     )
   } catch(err) {
-    console.log(err);
     return false;
   }
 };
