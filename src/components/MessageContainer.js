@@ -48,6 +48,20 @@ const styles = theme => ({
 
 
 class MessageContainer extends React.Component {
+  componentDidMount() {
+    this.fixScrollBottom();
+  }
+
+  componentDidUpdate() {
+    this.fixScrollBottom();
+  }
+
+  fixScrollBottom () {
+    if (this.chatWrapRef) {
+      this.chatWrapRef.scrollTop = this.chatWrapRef.scrollHeight;
+    }
+  };
+
   render() {
     const {
       classes,
@@ -73,7 +87,9 @@ class MessageContainer extends React.Component {
         </Paper>
         }
         {
-          Boolean(messages.length) && Boolean(chats.active) && <div className={classes.chatMessageWrap}>
+          Boolean(messages.length)
+          && Boolean(chats.active)
+          && <div className={classes.chatMessageWrap} ref={(el) => this.chatWrapRef = el}>
             {messages.map((message, index) => {
                 return <Message key={index} {...message} activeUser={activeUser}/>
             }
