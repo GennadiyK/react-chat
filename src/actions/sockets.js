@@ -59,11 +59,12 @@ export function socketsConnect () {
         payload: chat,
       })
     });
-    socket.on('deleted-chat', ({ chat }) => {
+    socket.on('deleted-chat', (data) => {
       const { activeId } = getState().chats;
+      const {chat} = data;
       dispatch({
         type: types.RECEIVE_DELETED_CHAT,
-        payload: chat,
+        payload: data,
       });
 
       if(activeId === chat._id) {
