@@ -10,6 +10,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import AppBar from "@material-ui/core/AppBar";
 import Header from "./Header";
+import ErrorMessage from './ErrorMessage';
 
 const styles = theme => ({
   container: {
@@ -34,7 +35,13 @@ class WelcomePage extends React.Component {
   };
 
   render() {
-    const { classes, signup, login, isAuthenticated } = this.props;
+    const {
+      classes,
+      signup,
+      login,
+      isAuthenticated,
+      error,
+    } = this.props;
     const { value } = this.state;
 
     if(isAuthenticated) {
@@ -64,6 +71,7 @@ class WelcomePage extends React.Component {
             {value === 1 && <SignUpForm onSubmit={signup}/>}
           </CardContent>
         </Card>
+        <ErrorMessage error={error}/>
       </React.Fragment>
     );
   }

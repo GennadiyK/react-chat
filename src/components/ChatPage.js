@@ -11,6 +11,7 @@ import SearchField from "./SearchField";
 import ChatHeader from "./ChatHeader";
 import MessageContainer from "./MessageContainer";
 import Modal from "./Modal";
+import  ErrorMessage from './ErrorMessage'
 
 const styles = theme => ({
   root: {
@@ -132,6 +133,7 @@ class ChatPage extends React.Component {
       joinChat,
       searchChat,
       messages,
+      error,
     } = this.props;
 
     const { activeTab } = this.state;
@@ -202,7 +204,9 @@ class ChatPage extends React.Component {
             <p>Do you want to logout?</p>
           </Modal>
         </div>
+        <ErrorMessage error={error}/>
       </div>
+
     )
   }
 }

@@ -41,6 +41,7 @@ const matStateToProps = state => {
       isChatMember: fromChats.isChatMember(state, activeChat),
     },
     messages: state.messages,
+    error: state.services.errors.chat,
   }
 };
 
