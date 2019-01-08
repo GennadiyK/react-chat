@@ -9,7 +9,7 @@ const styles = theme => ({
   },
 });
 
-const JoinChat = ({classes, onJoinButtonClick}) => {
+const JoinChat = ({classes, onJoinButtonClick, disabled}) => {
   return (
     <Paper className={classes.joinChat}>
       <Button
@@ -18,6 +18,7 @@ const JoinChat = ({classes, onJoinButtonClick}) => {
         variant="contained"
         fullWidth={true}
         onClick={onJoinButtonClick}
+        disabled={disabled}
       >
         JOIN
       </Button>

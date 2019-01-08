@@ -33,7 +33,7 @@ function AccountIcon(props) {
   );
 }
 
-function MainMenu ({classes, showModal}) {
+function MainMenu ({classes, showModal, disabled}) {
     return (
       <WithState>
         {({ anchorEl, updateAnchorEl }) => {
@@ -50,6 +50,7 @@ function MainMenu ({classes, showModal}) {
                 color="inherit"
                 mini={true}
                 className={classes.toggleButton}
+                disabled={disabled}
                 onClick={event => {
                   updateAnchorEl(event.currentTarget);
                 }}

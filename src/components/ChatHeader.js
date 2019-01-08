@@ -60,8 +60,10 @@ class ChatHeader extends React.Component {
     const {
       classes,
       activeChat,
-      activeUser
+      activeUser,
+      isConnected,
     } = this.props;
+
     const { anchorEl } = this.state;
     const open = Boolean(anchorEl);
 
@@ -82,8 +84,9 @@ class ChatHeader extends React.Component {
                     aria-haspopup="true"
                     color="inherit"
                     onClick={this.handleClick}
+                    disabled={!isConnected}
                   >
-                    <MoreVertIcon />
+                    <MoreVertIcon/>
                   </IconButton>
                   }
                   <Menu
@@ -108,7 +111,7 @@ class ChatHeader extends React.Component {
               </Typography>
               )
             }
-            <MainMenu showModal={this.props.showModal}/>
+            <MainMenu showModal={this.props.showModal} disabled={!isConnected}/>
           </Toolbar>
        </AppBar>
     )

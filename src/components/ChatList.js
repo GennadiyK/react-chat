@@ -56,7 +56,12 @@ class ChatList extends React.Component {
   };
 
   render() {
-    const { classes, chats, showCreateChatModal} = this.props;
+    const {
+      classes,
+      chats,
+      showCreateChatModal,
+      disabled,
+    } = this.props;
     return (
       <div className={classes.root}>
         <List component="nav">
@@ -69,8 +74,8 @@ class ChatList extends React.Component {
               disableGutters={true}
               onClick={(event) => this.handleListItemClick(event, chat._id)}
               className={classes.listItem}
-
               key={index}
+              disabled={disabled}
             >
 
               <Avatar className={classNames(classes.listItemAvatar)} colorFrom={chat.title}>{chat.title}</Avatar>
@@ -81,7 +86,14 @@ class ChatList extends React.Component {
               There is no chats yet....
             </Typography>}
         </List>
-        <Button variant="fab" color="primary" aria-label="Add" className={classes.addButton} onClick={showCreateChatModal}>
+        <Button
+          variant="fab"
+          color="primary"
+          aria-label="Add"
+          className={classes.addButton}
+          onClick={showCreateChatModal}
+          disabled={disabled}
+        >
           <AddIcon />
         </Button>
       </div>

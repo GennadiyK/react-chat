@@ -134,6 +134,7 @@ class ChatPage extends React.Component {
       searchChat,
       messages,
       error,
+      isConnected,
     } = this.props;
 
     const { activeTab } = this.state;
@@ -141,6 +142,7 @@ class ChatPage extends React.Component {
       <div className={classes.root}>
         <div className={classes.appFrame}>
           <ChatHeader
+            isConnected={isConnected}
             showModal={this.handleClickConfirmModal}
             deleteChat={deleteChat}
             leaveChat={leaveChat}
@@ -161,6 +163,7 @@ class ChatPage extends React.Component {
               chats={activeTab === 0 ? chats.my : chats.all}
               setActiveChat={setActiveChat}
               showCreateChatModal={this.handleClickCreateChatModal}
+              disabled={!isConnected}
             />
             <BottomNavigation
               value={activeTab}
@@ -168,8 +171,8 @@ class ChatPage extends React.Component {
               showLabels
               className={classes.root}
             >
-              <BottomNavigationAction label="My chats" icon={<RestoreIcon />} />
-              <BottomNavigationAction label="Explore" icon={<ExploreIcon />} />
+              <BottomNavigationAction label="My chats" icon={<RestoreIcon />} disabled={!isConnected}/>
+              <BottomNavigationAction label="Explore" icon={<ExploreIcon />} disabled={!isConnected}/>
             </BottomNavigation>
           </Drawer>
           <MessageContainer
@@ -178,6 +181,7 @@ class ChatPage extends React.Component {
             activeUser={activeUser}
             chats={chats}
             messages={messages}
+            isConnected={isConnected}
           />
           <Modal
             isOpen={this.state.createChatModalOpen}

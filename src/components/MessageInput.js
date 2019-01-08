@@ -32,7 +32,10 @@ class MessageInput extends React.Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const {
+      classes,
+      disabled,
+    } = this.props;
 
     return (
       <Paper  elevation={3} className={classes.textFieldPaper}>
@@ -46,6 +49,7 @@ class MessageInput extends React.Component {
           value={this.state.value}
           onChange={this.handleValueChange}
           onKeyPress={this.handleSendMessage}
+          disabled={disabled}
         />
       </Paper>
     )

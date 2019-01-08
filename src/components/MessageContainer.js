@@ -70,6 +70,7 @@ class MessageContainer extends React.Component {
       activeUser,
       onJoinButtonClick,
       sendMessage,
+      isConnected,
     } = this.props;
 
     return (
@@ -99,8 +100,8 @@ class MessageContainer extends React.Component {
         {
           chats.active && <div className={classes.textFieldWrap}>
             {activeUser.isChatMember ?
-              <MessageInput sendMessage={sendMessage}/> :
-              <JoinChat onJoinButtonClick={() => onJoinButtonClick(chats.active._id)}/>
+              <MessageInput sendMessage={sendMessage} desabled={!isConnected}/> :
+              <JoinChat disabled={!isConnected} onJoinButtonClick={() => onJoinButtonClick(chats.active._id)}/>
             }
           </div>
         }

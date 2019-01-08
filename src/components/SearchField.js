@@ -18,9 +18,12 @@ const styles = theme => ({
 class SearchField extends React.Component {
   handleSearch = (e) => {
     this.props.searchChat(e.target.value)
-  }
+  };
   render() {
-    const { classes } = this.props;
+    const {
+      classes,
+      disabled,
+    } = this.props;
 
     return (
       <form className={classes.container} noValidate autoComplete="off">
