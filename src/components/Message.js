@@ -60,8 +60,11 @@ function Message({
   }
   return (
     <div
-      className={sender._id === activeUser._id
-        ? classNames(classes.chatMessage, classes.chatMessageMe) : classes.chatMessage}
+      className={
+        sender._id === activeUser._id
+          ? classNames(classes.chatMessage, classes.chatMessageMe)
+          : classes.chatMessage
+      }
     >
       <Avatar colorFrom={sender._id}>{titleInitials(sender.username)}</Avatar>
       <Paper className={classes.chatMessageInner} elevation={3}>

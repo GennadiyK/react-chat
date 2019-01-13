@@ -19,7 +19,7 @@ const JoinChat = ({ classes, onJoinButtonClick, disabled }) => (
       onClick={onJoinButtonClick}
       disabled={disabled}
     >
-        JOIN
+      JOIN
     </Button>
   </Paper>
 );

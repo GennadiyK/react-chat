@@ -7,15 +7,7 @@ import teal from '@material-ui/core/colors/teal';
 import green from '@material-ui/core/colors/green';
 import blueGrey from '@material-ui/core/colors/blueGrey';
 
-const colors = [
-  red,
-  pink,
-  purple,
-  indigo,
-  blue,
-  teal,
-  green,
-];
+const colors = [red, pink, purple, indigo, blue, teal, green];
 
 export default function colorFrom(string) {
   try {

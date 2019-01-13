@@ -96,12 +96,12 @@ export const errors = (state = initialState.errors, action) => {
     case types.SIGNUP_SUCCESS:
     case types.LOGIN_SUCCESS:
     case types.LOGOUT_SUCCESS:
-    // case types.RECEIVE_AUTH_SUCCESS:
+      // case types.RECEIVE_AUTH_SUCCESS:
       return { ...state, auth: null };
     case types.SIGNUP_FAILURE:
     case types.LOGIN_FAILURE:
     case types.LOGOUT_FAILURE:
-    // case types.RECEIVE_AUTH_FAILURE:
+      // case types.RECEIVE_AUTH_FAILURE:
       return { ...state, auth: action.payload };
     case types.FETCH_MY_CHATS_FAILURE:
     case types.FETCH_ALL_CHATS_FAILURE:

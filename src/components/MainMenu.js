@@ -22,7 +22,6 @@ const styles = () => ({
   },
 });
 
-
 function AccountIcon(props) {
   return (
     <SvgIcon {...props}>

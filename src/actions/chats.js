@@ -93,22 +93,21 @@ export function fetchChat(chatId) {
 
 export function setActiveChat(chatId) {
   return (dispatch) => {
-    dispatch(fetchChat(chatId))
-      .then((data) => {
-        if (!data) {
-          dispatch(redirect('/chat'));
+    dispatch(fetchChat(chatId)).then((data) => {
+      if (!data) {
+        dispatch(redirect('/chat'));
 
-          return dispatch({
-            type: types.UNSET_ACTIVE_CHAT,
-          });
-        }
-        dispatch({
-          type: types.SET_ACTIVE_CHAT,
-          payload: data,
+        return dispatch({
+          type: types.UNSET_ACTIVE_CHAT,
         });
-
-        return dispatch(redirect(`/chat/${data.chat._id}`));
+      }
+      dispatch({
+        type: types.SET_ACTIVE_CHAT,
+        payload: data,
       });
+
+      return dispatch(redirect(`/chat/${data.chat._id}`));
+    });
   };
 }
 
@@ -125,22 +124,24 @@ export function createChat(payload) {
       type: types.CREATE_CHAT_REQUEST,
     });
 
-    return callApi('chats', token, { method: 'POST' }, payload).then((data) => {
-      dispatch({
-        type: types.CREATE_CHAT_SUCCESS,
-        payload: data,
-      });
+    return callApi('chats', token, { method: 'POST' }, payload)
+      .then((data) => {
+        dispatch({
+          type: types.CREATE_CHAT_SUCCESS,
+          payload: data,
+        });
 
-      dispatch(redirect(`/chat/${data.chat._id}`));
+        dispatch(redirect(`/chat/${data.chat._id}`));
 
-      return data;
-    }).catch((err) => {
-      console.log(err);
-      dispatch({
-        type: types.CREATE_CHAT_FAILURE,
-        payload: err,
+        return data;
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: types.CREATE_CHAT_FAILURE,
+          payload: err,
+        });
       });
-    });
   };
 }
 
@@ -158,22 +159,24 @@ export function joinChat(chatId) {
       type: types.JOIN_CHAT_REQUEST,
     });
 
-    return callApi(`chats/${chatId}/join`, token).then((data) => {
-      dispatch({
-        type: types.JOIN_CHAT_SUCCESS,
-        payload: data,
-      });
+    return callApi(`chats/${chatId}/join`, token)
+      .then((data) => {
+        dispatch({
+          type: types.JOIN_CHAT_SUCCESS,
+          payload: data,
+        });
 
-      dispatch(redirect(`/chat/${data.chat._id}`));
-      dispatch(fetchChat(chatId));
+        dispatch(redirect(`/chat/${data.chat._id}`));
+        dispatch(fetchChat(chatId));
 
-      return data;
-    }).catch((err) => {
-      dispatch({
-        type: types.JOIN_CHAT_FAILURE,
-        payload: err,
+        return data;
+      })
+      .catch((err) => {
+        dispatch({
+          type: types.JOIN_CHAT_FAILURE,
+          payload: err,
+        });
       });
-    });
   };
 }
 
@@ -191,23 +194,25 @@ export function leaveChat(chatId) {
       type: types.LEAVE_CHAT_REQUEST,
     });
 
-    return callApi(`chats/${chatId}/leave`, token).then((data) => {
-      dispatch({
-        type: types.LEAVE_CHAT_SUCCESS,
-        payload: data,
-      });
+    return callApi(`chats/${chatId}/leave`, token)
+      .then((data) => {
+        dispatch({
+          type: types.LEAVE_CHAT_SUCCESS,
+          payload: data,
+        });
 
-      dispatch({
-        type: types.UNSET_ACTIVE_CHAT,
-      });
+        dispatch({
+          type: types.UNSET_ACTIVE_CHAT,
+        });
 
-      return data;
-    }).catch((err) => {
-      dispatch({
-        type: types.LEAVE_CHAT_FAILURE,
-        payload: err,
+        return data;
+      })
+      .catch((err) => {
+        dispatch({
+          type: types.LEAVE_CHAT_FAILURE,
+          payload: err,
+        });
       });
-    });
   };
 }
 
@@ -225,25 +230,27 @@ export function deleteChat(id) {
       type: types.DELETE_CHAT_REQUEST,
     });
 
-    return callApi(`chats/${id}`, token, { method: 'DELETE' }).then((data) => {
-      dispatch({
-        type: types.DELETE_CHAT_SUCCESS,
-        payload: data,
-      });
+    return callApi(`chats/${id}`, token, { method: 'DELETE' })
+      .then((data) => {
+        dispatch({
+          type: types.DELETE_CHAT_SUCCESS,
+          payload: data,
+        });
 
-      dispatch({
-        type: types.UNSET_ACTIVE_CHAT,
-      });
+        dispatch({
+          type: types.UNSET_ACTIVE_CHAT,
+        });
 
-      dispatch(redirect('chat'));
+        dispatch(redirect('chat'));
 
-      return data;
-    }).catch((err) => {
-      dispatch({
-        type: types.DELETE_CHAT_FAILURE,
-        payload: err,
+        return data;
+      })
+      .catch((err) => {
+        dispatch({
+          type: types.DELETE_CHAT_FAILURE,
+          payload: err,
+        });
       });
-    });
   };
 }
 

@@ -32,9 +32,9 @@
     "build": "react-app-rewired build",
     "test": "react-app-rewired test --env=jsdom",
     "eject": "react-app-rewired eject",
-    "lint": "eslint 'src/**/*.js'",
+    "lint": "eslint \"src/**/*.js\"",
     "lint:fix": "npm run lint -- --fix",
-    "format": "prettier-eslint --write '**/*.{js,json}'",
+    "format": "prettier-eslint --write \"**/*.{js,json}\"",
     "precommit": "lint-staged"
   },
   "devDependencies": {
@@ -50,6 +50,10 @@
     "prettier-eslint-cli": "^4.7.1"
   },
   "lint-staged": {
-    "**/*.js": ["npm run lint:fix", "npm run format", "git add"]
+    "**/*.js": [
+      "npm run lint:fix",
+      "npm run format",
+      "git add"
+    ]
   }
 }

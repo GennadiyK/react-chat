@@ -9,7 +9,6 @@ const styles = () => ({
   },
 });
 
-
 class SignInForm extends React.Component {
   constructor() {
     super();
@@ -28,7 +27,6 @@ class SignInForm extends React.Component {
         isValid: true,
       },
     };
-
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -53,7 +51,6 @@ class SignInForm extends React.Component {
     if (!this.validate()) {
       return;
     }
-
 
     onSubmit(username.value, password.value);
   }

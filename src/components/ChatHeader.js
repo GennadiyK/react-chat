@@ -31,7 +31,6 @@ const styles = () => ({
   },
 });
 
-
 class ChatHeader extends React.Component {
   state = {
     anchorEl: null,
@@ -44,7 +43,6 @@ class ChatHeader extends React.Component {
   handleClose = () => {
     this.setState({ anchorEl: null });
   };
-
 
   deleteChatHandle = (id) => {
     const { deleteChat } = this.props;
@@ -60,40 +58,32 @@ class ChatHeader extends React.Component {
 
   render() {
     const {
-      classes,
-      activeChat,
-      activeUser,
-      isConnected,
-      showModal,
+      classes, activeChat, activeUser, isConnected, showModal,
     } = this.props;
 
     const { anchorEl } = this.state;
     const open = Boolean(anchorEl);
 
     return (
-      <AppBar
-        position="absolute"
-        className={classes.appBar}
-      >
+      <AppBar position="absolute" className={classes.appBar}>
         <Toolbar className={classes.toolBar}>
-          { activeChat ? (
+          {activeChat ? (
             <React.Fragment>
               <Avatar className={classes.toolBarAvatar}>{titleInitials(activeChat.title)}</Avatar>
               <Typography className={classes.toolBarTitle} variant="title" color="inherit" noWrap>
                 {activeChat.title}
                 {activeUser.isChatMember && (
-                <IconButton
-                  aria-label="More"
-                  aria-owns={open ? 'long-menu' : null}
-                  aria-haspopup="true"
-                  color="inherit"
-                  onClick={this.handleClick}
-                  disabled={!isConnected}
-                >
-                  <MoreVertIcon />
-                </IconButton>
-                )
-                  }
+                  <IconButton
+                    aria-label="More"
+                    aria-owns={open ? 'long-menu' : null}
+                    aria-haspopup="true"
+                    color="inherit"
+                    onClick={this.handleClick}
+                    disabled={!isConnected}
+                  >
+                    <MoreVertIcon />
+                  </IconButton>
+                )}
                 <Menu
                   id="long-menu"
                   anchorEl={anchorEl}
@@ -103,21 +93,22 @@ class ChatHeader extends React.Component {
                     style: {},
                   }}
                 >
-                  { activeUser.isMember
-                && <MenuItem onClick={() => this.leaveChatHandle(activeChat._id)}>Leave</MenuItem>
-                }
-                  { activeUser.isCreator
-                && <MenuItem onClick={() => this.deleteChatHandle(activeChat._id)}>Delete</MenuItem>
-                }
+                  {activeUser.isMember && (
+                    <MenuItem onClick={() => this.leaveChatHandle(activeChat._id)}>Leave</MenuItem>
+                  )}
+                  {activeUser.isCreator && (
+                    <MenuItem onClick={() => this.deleteChatHandle(activeChat._id)}>
+                      Delete
+                    </MenuItem>
+                  )}
                 </Menu>
               </Typography>
             </React.Fragment>
           ) : (
             <Typography className={classes.toolBarTitle} variant="title" color="inherit" noWrap>
-                React chat
+              React chat
             </Typography>
-          )
-            }
+          )}
           <MainMenu showModal={showModal} disabled={!isConnected} />
         </Toolbar>
       </AppBar>

@@ -23,7 +23,6 @@ const styles = theme => ({
   },
 });
 
-
 class WelcomePage extends React.Component {
   state = {
     value: 0,
@@ -35,18 +34,12 @@ class WelcomePage extends React.Component {
 
   render() {
     const {
-      classes,
-      signup,
-      login,
-      isAuthenticated,
-      error,
+      classes, signup, login, isAuthenticated, error,
     } = this.props;
     const { value } = this.state;
 
     if (isAuthenticated) {
-      return (
-        <Redirect to="/chat" />
-      );
+      return <Redirect to="/chat" />;
     }
 
     return (

@@ -8,11 +8,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 class Modal extends React.Component {
   render() {
     const {
-      isOpen,
-      title,
-      handleClose,
-      handleConfirm,
-      children,
+      isOpen, title, handleClose, handleConfirm, children,
     } = this.props;
 
     return (
@@ -24,9 +20,7 @@ class Modal extends React.Component {
           aria-describedby="alert-dialog-description"
         >
           <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
-          <DialogContent>
-            { children }
-          </DialogContent>
+          <DialogContent>{children}</DialogContent>
           <DialogActions>
             <Button onClick={handleClose} color="primary">
               no

@@ -1,91 +1,122 @@
 {
-  "chats": [{
-    "title": "Harvey Moss",
-    "date": "July 20, 2014"
-  }, {
-    "title": "Marjorie Atnip",
-    "date": "July 1, 2014"
-  }, {
-    "title": "Heather Richardson",
-    "date": "July 20, 2017"
-  }, {
-    "title": "Alma Greenfeild",
-    "date": "October 16, 2018"
-  }, {
-    "title": "Jim Bos",
-    "date": "October 16, 2018"
-  }, {
-    "title": "Henry Willson",
-    "date": "October 24, 2018"
-  }, {
-    "title": "Alma Reed",
-    "date": "November 14, 2018"
-  }, {
-    "title": "John Joy",
-    "date": "November 19, 2018"
-  }, {
-    "title": "Barny Bons",
-    "date": "December 27, 2018"
-  }, {
-    "title": "Larry Hire",
-    "date": "October 16, 2018"
-  }, {
-    "title": "Harvey Moss",
-    "date": "November 22, 2018"
-  }, {
-    "title": "Philip Taylor",
-    "date": "November 27, 2018"
-  }, {
-    "title": "Frank Underwood",
-    "date": "December 20, 2018"
-  }, {
-    "title": "Claire Underwood",
-    "date": "October 16, 2018"
-  }],
-  "messages": [{
-    "sender": "someone",
-    "content": "Hello, World!"
-  }, {
-    "sender": "someone",
-    "content": "Here's my very first message..."
-  }, {
-    "sender": "me",
-    "content": "Oh, hi 👋🏻"
-  }, {
-    "sender": "me",
-    "content": "What's up?"
-  }, {
-    "sender": "me",
-    "content": "Everything is up, buddy 😎"
-  }, {
-    "sender": "someone",
-    "content": "Neat 👍🏻\nKeep rocking"
-  }, {
-    "sender": "someone",
-    "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
-  }, {
-    "sender": "me",
-    "content": "What's that?"
-  }, {
-    "sender": "someone",
-    "content": "That's a HUUUUUGGGEEEE message!!11"
-  }, {
-    "sender": "me",
-    "content": "LOL"
-  }, {
-    "sender": "someone",
-    "content": "Wanna more?"
-  }, {
-    "sender": "me",
-    "content": "Sure 😁"
-  }, {
-    "sender": "someone",
-    "content": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem."
-  }, {
-    "sender": "me",
-    "content": "I can do this too!"
-  }, {
-    "sender": "me",
-    "content": "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga."
-  }]
+  "chats": [
+    {
+      "title": "Harvey Moss",
+      "date": "July 20, 2014"
+    },
+    {
+      "title": "Marjorie Atnip",
+      "date": "July 1, 2014"
+    },
+    {
+      "title": "Heather Richardson",
+      "date": "July 20, 2017"
+    },
+    {
+      "title": "Alma Greenfeild",
+      "date": "October 16, 2018"
+    },
+    {
+      "title": "Jim Bos",
+      "date": "October 16, 2018"
+    },
+    {
+      "title": "Henry Willson",
+      "date": "October 24, 2018"
+    },
+    {
+      "title": "Alma Reed",
+      "date": "November 14, 2018"
+    },
+    {
+      "title": "John Joy",
+      "date": "November 19, 2018"
+    },
+    {
+      "title": "Barny Bons",
+      "date": "December 27, 2018"
+    },
+    {
+      "title": "Larry Hire",
+      "date": "October 16, 2018"
+    },
+    {
+      "title": "Harvey Moss",
+      "date": "November 22, 2018"
+    },
+    {
+      "title": "Philip Taylor",
+      "date": "November 27, 2018"
+    },
+    {
+      "title": "Frank Underwood",
+      "date": "December 20, 2018"
+    },
+    {
+      "title": "Claire Underwood",
+      "date": "October 16, 2018"
+    }
+  ],
+  "messages": [
+    {
+      "sender": "someone",
+      "content": "Hello, World!"
+    },
+    {
+      "sender": "someone",
+      "content": "Here's my very first message..."
+    },
+    {
+      "sender": "me",
+      "content": "Oh, hi 👋🏻"
+    },
+    {
+      "sender": "me",
+      "content": "What's up?"
+    },
+    {
+      "sender": "me",
+      "content": "Everything is up, buddy 😎"
+    },
+    {
+      "sender": "someone",
+      "content": "Neat 👍🏻\nKeep rocking"
+    },
+    {
+      "sender": "someone",
+      "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+    },
+    {
+      "sender": "me",
+      "content": "What's that?"
+    },
+    {
+      "sender": "someone",
+      "content": "That's a HUUUUUGGGEEEE message!!11"
+    },
+    {
+      "sender": "me",
+      "content": "LOL"
+    },
+    {
+      "sender": "someone",
+      "content": "Wanna more?"
+    },
+    {
+      "sender": "me",
+      "content": "Sure 😁"
+    },
+    {
+      "sender": "someone",
+      "content": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem."
+    },
+    {
+      "sender": "me",
+      "content": "I can do this too!"
+    },
+    {
+      "sender": "me",
+      "content": "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga."
+    }
+  ]
 }

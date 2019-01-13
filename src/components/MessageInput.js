@@ -9,7 +9,6 @@ const styles = () => ({
   },
 });
 
-
 class MessageInput extends React.Component {
   state = {
     value: '',
@@ -31,10 +30,7 @@ class MessageInput extends React.Component {
   };
 
   render() {
-    const {
-      classes,
-      disabled,
-    } = this.props;
+    const { classes, disabled } = this.props;
     const { value } = this.state;
 
     return (

@@ -38,7 +38,6 @@ const styles = () => ({
   },
 });
 
-
 class ChatPage extends React.Component {
   state = {
     confirmModalOpen: false,
@@ -49,29 +48,28 @@ class ChatPage extends React.Component {
 
   componentDidMount() {
     const {
-      match,
-      fetchAllChats,
-      fetchMyChats,
-      socketsConnect,
-      mountChat,
+      match, fetchAllChats, fetchMyChats, socketsConnect, mountChat,
     } = this.props;
 
-    Promise.all([
-      fetchAllChats(),
-      fetchMyChats(),
-    ]).then(() => {
-      socketsConnect();
-    }).then(() => {
-      const { chatId } = match.params;
+    Promise.all([fetchAllChats(), fetchMyChats()])
+      .then(() => {
+        socketsConnect();
+      })
+      .then(() => {
+        const { chatId } = match.params;
 
-      if (chatId) {
-        mountChat(chatId);
-      }
-    });
+        if (chatId) {
+          mountChat(chatId);
+        }
+      });
   }
 
   componentWillReceiveProps(nextProps) {
-    const { match: { params }, unmountChat, mountChat } = this.props;
+    const {
+      match: { params },
+      unmountChat,
+      mountChat,
+    } = this.props;
     const { params: nextParams } = nextProps.match;
 
     if (nextParams.chatId && params.chatId !== nextParams.chatId) {
@@ -100,15 +98,11 @@ class ChatPage extends React.Component {
     this.setState({
       chatName: event.target.value,
     });
-  }
+  };
 
   handleCreateChat = () => {
-    const {
-      createChat,
-    } = this.props;
-    const {
-      chatName,
-    } = this.state;
+    const { createChat } = this.props;
+    const { chatName } = this.state;
     createChat({
       data: {
         title: chatName,
@@ -141,11 +135,7 @@ class ChatPage extends React.Component {
       isConnected,
     } = this.props;
 
-    const {
-      activeTab,
-      createChatModalOpen,
-      confirmModalOpen,
-    } = this.state;
+    const { activeTab, createChatModalOpen, confirmModalOpen } = this.state;
     return (
       <div className={classes.root}>
         <div className={classes.appFrame}>
@@ -179,8 +169,16 @@ class ChatPage extends React.Component {
               showLabels
               className={classes.root}
             >
-              <BottomNavigationAction label="My chats" icon={<RestoreIcon />} disabled={!isConnected} />
-              <BottomNavigationAction label="Explore" icon={<ExploreIcon />} disabled={!isConnected} />
+              <BottomNavigationAction
+                label="My chats"
+                icon={<RestoreIcon />}
+                disabled={!isConnected}
+              />
+              <BottomNavigationAction
+                label="Explore"
+                icon={<ExploreIcon />}
+                disabled={!isConnected}
+              />
             </BottomNavigation>
           </Drawer>
           <MessageContainer
@@ -218,7 +216,6 @@ class ChatPage extends React.Component {
         </div>
         <ErrorMessage error={error} />
       </div>
-
     );
   }
 }

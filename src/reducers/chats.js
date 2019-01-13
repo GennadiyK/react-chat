@@ -61,10 +61,13 @@ const byIds = (state = initialState.byIds, action) => {
     case types.FETCH_MY_CHATS_SUCCESS:
       return {
         ...state,
-        ...action.payload.chats.reduce((ids, chat) => ({
-          ...ids,
-          [getChatId(chat)]: chat,
-        }), {}),
+        ...action.payload.chats.reduce(
+          (ids, chat) => ({
+            ...ids,
+            [getChatId(chat)]: chat,
+          }),
+          {},
+        ),
       };
     case types.CREATE_CHAT_SUCCESS:
     case types.JOIN_CHAT_SUCCESS:
@@ -110,7 +113,6 @@ export default combineReducers({
   searchValue,
 });
 
-
 export const getActiveUser = state => state.auth.user;
 export const getUserId = user => user._id;
 export const isCreator = (state, chat) => {
@@ -123,9 +125,7 @@ export const isCreator = (state, chat) => {
 
 export const isMember = (state, chat) => {
   try {
-    return chat.members.some(
-      member => getUserId(member) === getUserId(getActiveUser(state)),
-    );
+    return chat.members.some(member => getUserId(member) === getUserId(getActiveUser(state)));
   } catch (err) {
     return false;
   }

@@ -11,16 +11,12 @@ import {
   searchChat,
 } from '../actions/chats';
 import {
-  sendMessage,
-  mountChat,
-  unmountChat,
-  socketsConnect,
+  sendMessage, mountChat, unmountChat, socketsConnect,
 } from '../actions/sockets';
 import { logout } from '../actions/auth';
 import ChatPage from '../components/ChatPage';
 import * as fromChats from '../reducers/chats';
 import { filterChats } from '../utils/filter';
-
 
 const matStateToProps = (state) => {
   const activeChat = fromChats.getById(state.chats, state.chats.activeId) || null;
@@ -46,21 +42,24 @@ const matStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = dispatch => bindActionCreators({
-  fetchAllChats,
-  fetchMyChats,
-  setActiveChat,
-  createChat,
-  deleteChat,
-  leaveChat,
-  logout,
-  joinChat,
-  sendMessage,
-  searchChat,
-  mountChat,
-  unmountChat,
-  socketsConnect,
-}, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators(
+  {
+    fetchAllChats,
+    fetchMyChats,
+    setActiveChat,
+    createChat,
+    deleteChat,
+    leaveChat,
+    logout,
+    joinChat,
+    sendMessage,
+    searchChat,
+    mountChat,
+    unmountChat,
+    socketsConnect,
+  },
+  dispatch,
+);
 
 export default connect(
   matStateToProps,

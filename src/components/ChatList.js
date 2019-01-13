@@ -11,7 +11,6 @@ import AddIcon from '@material-ui/icons/Add';
 import { Link } from 'react-router-dom';
 import Avatar from './Avatar';
 
-
 const styles = theme => ({
   root: {
     flexGrow: 1,
@@ -47,7 +46,6 @@ class ChatList extends React.Component {
     };
   }
 
-
   handleListItemClick = (event, chatId) => {
     const { setActiveChat } = this.props;
     this.setState({
@@ -58,41 +56,36 @@ class ChatList extends React.Component {
 
   render() {
     const {
-      classes,
-      chats,
-      showCreateChatModal,
-      disabled,
+      classes, chats, showCreateChatModal, disabled,
     } = this.props;
     const { selectedIndex } = this.state;
     return (
       <div className={classes.root}>
         <List component="nav">
-          {chats && chats.length ? (chats.map(chat => (
-            <ListItem
-              button
-              component={Link}
-              selected={Boolean(selectedIndex === chat._id)}
-              to={`/chat/${chat._id}`}
-              disableGutters
-              onClick={event => this.handleListItemClick(event, chat._id)}
-              className={classes.listItem}
-              key={chat._id}
-              disabled={disabled}
-            >
-              <Avatar
-                className={classNames(classes.listItemAvatar)}
-                colorFrom={chat.title}
+          {chats && chats.length ? (
+            chats.map(chat => (
+              <ListItem
+                button
+                component={Link}
+                selected={Boolean(selectedIndex === chat._id)}
+                to={`/chat/${chat._id}`}
+                disableGutters
+                onClick={event => this.handleListItemClick(event, chat._id)}
+                className={classes.listItem}
+                key={chat._id}
+                disabled={disabled}
               >
-                {chat.title}
-              </Avatar>
-              <ListItemText primary={chat.title} secondary={chat.date} />
-            </ListItem>
-          )))
-            : (
-              <Typography variant="subheading" align="center">
+                <Avatar className={classNames(classes.listItemAvatar)} colorFrom={chat.title}>
+                  {chat.title}
+                </Avatar>
+                <ListItemText primary={chat.title} secondary={chat.date} />
+              </ListItem>
+            ))
+          ) : (
+            <Typography variant="subheading" align="center">
               There is no chats yet....
-              </Typography>
-            )}
+            </Typography>
+          )}
         </List>
         <Button
           variant="fab"

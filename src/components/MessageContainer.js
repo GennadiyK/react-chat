@@ -46,7 +46,6 @@ const styles = theme => ({
   },
 });
 
-
 class MessageContainer extends React.Component {
   componentDidMount() {
     this.fixScrollBottom();
@@ -76,53 +75,50 @@ class MessageContainer extends React.Component {
     return (
       <main className={classes.content}>
         {!chats.active && (
-        <Paper className={classes.paper} elevation={1}>
-          <Typography variant="display1" component="h3" gutterBottom>
-            Start messaging…
-          </Typography>
-          <Typography component="p" gutterBottom>
-            Use
-            {' '}
-            <strong>Global</strong>
-            {' '}
+          <Paper className={classes.paper} elevation={1}>
+            <Typography variant="display1" component="h3" gutterBottom>
+              Start messaging…
+            </Typography>
+            <Typography component="p" gutterBottom>
+              Use
+              {' '}
+              <strong>Global</strong>
+              {' '}
 to explore communities around here.
-          </Typography>
-          <Typography component="p" gutterBottom>
-            Use
-            {' '}
-            <strong>Recents</strong>
-            {' '}
+            </Typography>
+            <Typography component="p" gutterBottom>
+              Use
+              {' '}
+              <strong>Recents</strong>
+              {' '}
 to see your recent conversations.
-          </Typography>
-        </Paper>
-        )
-        }
-        {
-          Boolean(messages.length)
-          && Boolean(chats.active)
-          && (
-          <div className={classes.chatMessageWrap} ref={(el) => { this.chatWrapRef = el; }}>
-            {messages.map(
-              message => <Message key={message._id} {...message} activeUser={activeUser} />,
+            </Typography>
+          </Paper>
+        )}
+        {Boolean(messages.length) && Boolean(chats.active) && (
+          <div
+            className={classes.chatMessageWrap}
+            ref={(el) => {
+              this.chatWrapRef = el;
+            }}
+          >
+            {messages.map(message => (
+              <Message key={message._id} {...message} activeUser={activeUser} />
+            ))}
+          </div>
+        )}
+        {chats.active && (
+          <div className={classes.textFieldWrap}>
+            {activeUser.isChatMember ? (
+              <MessageInput sendMessage={sendMessage} desabled={!isConnected} />
+            ) : (
+              <JoinChat
+                disabled={!isConnected}
+                onJoinButtonClick={() => onJoinButtonClick(chats.active._id)}
+              />
             )}
           </div>
-          )
-        }
-        {
-          chats.active && (
-          <div className={classes.textFieldWrap}>
-            {activeUser.isChatMember
-              ? <MessageInput sendMessage={sendMessage} desabled={!isConnected} />
-              : (
-                <JoinChat
-                  disabled={!isConnected}
-                  onJoinButtonClick={() => onJoinButtonClick(chats.active._id)}
-                />
-              )
-            }
-          </div>
-          )
-        }
+        )}
       </main>
     );
   }
