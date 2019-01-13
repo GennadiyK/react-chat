@@ -11,7 +11,8 @@ class Modal extends React.Component {
       isOpen,
       title,
       handleClose,
-      handleConfirm
+      handleConfirm,
+      children,
     } = this.props;
 
     return (
@@ -24,7 +25,7 @@ class Modal extends React.Component {
         >
           <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
           <DialogContent>
-            { this.props.children }
+            { children }
           </DialogContent>
           <DialogActions>
             <Button onClick={handleClose} color="primary">

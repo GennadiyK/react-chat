@@ -13,15 +13,16 @@ class ErrorMessage extends React.Component {
   };
 
   componentWillReceiveProps = (nextProps) => {
-    if(nextProps.error) {
-      this.setState({ open: true})
+    if (nextProps.error) {
+      this.setState({ open: true });
     }
   };
 
   render() {
     const { error } = this.props;
+    const { open } = this.state;
 
-    if(!error) {
+    if (!error) {
       return null;
     }
 
@@ -32,7 +33,7 @@ class ErrorMessage extends React.Component {
             vertical: 'bottom',
             horizontal: 'left',
           }}
-          open={this.state.open}
+          open={open}
           autoHideDuration={6000}
           onClose={this.handleClose}
           message={<span>{error.message}</span>}

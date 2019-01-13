@@ -1,19 +1,18 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
-const styles = theme => ({
+const styles = () => ({
   btn: {
-    marginTop: '16px'
-  }
+    marginTop: '16px',
+  },
 });
 
 
 class SignInForm extends React.Component {
   constructor() {
-    super()
+    super();
 
     this.state = {
       username: {
@@ -27,33 +26,12 @@ class SignInForm extends React.Component {
       confirmPassword: {
         value: '',
         isValid: true,
-      }
+      },
     };
 
 
-    this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-
-  }
-  handleSubmit (e) {
-    e.preventDefault();
-    const { username, password } = this.state;
-    if (!this.validate()) {
-      return;
-    }
-
-
-    this.props.onSubmit(username.value, password.value);
-  }
-  handleInputChange(e) {
-    e.persist()
-    const { name, value} = e.target;
-    this.setState((prevState) => ({
-      [name]: {
-        ...prevState[name],
-        value
-      }
-    }))
+    this.handleInputChange = this.handleInputChange.bind(this);
   }
 
   validate = () => {
@@ -66,7 +44,31 @@ class SignInForm extends React.Component {
     });
 
     return isValid;
+  };
+
+  handleSubmit(e) {
+    e.preventDefault();
+    const { username, password } = this.state;
+    const { onSubmit } = this.props;
+    if (!this.validate()) {
+      return;
+    }
+
+
+    onSubmit(username.value, password.value);
   }
+
+  handleInputChange(e) {
+    e.persist();
+    const { name, value } = e.target;
+    this.setState(prevState => ({
+      [name]: {
+        ...prevState[name],
+        value,
+      },
+    }));
+  }
+
   render() {
     const { classes } = this.props;
     const { username, password, confirmPassword } = this.state;
@@ -79,8 +81,8 @@ class SignInForm extends React.Component {
           type="text"
           autoComplete="current-name"
           margin="normal"
-          required={true}
-          fullWidth={true}
+          required
+          fullWidth
           onChange={this.handleInputChange}
           value={username.value}
           name="username"
@@ -92,8 +94,8 @@ class SignInForm extends React.Component {
           type="password"
           autoComplete="current-password"
           margin="normal"
-          required={true}
-          fullWidth={true}
+          required
+          fullWidth
           onChange={this.handleInputChange}
           value={password.value}
           name="password"
@@ -105,23 +107,19 @@ class SignInForm extends React.Component {
           type="password"
           autoComplete="current-password"
           margin="normal"
-          required={true}
-          fullWidth={true}
+          required
+          fullWidth
           onChange={this.handleInputChange}
           value={confirmPassword.value}
           name="confirmPassword"
           error={!confirmPassword.isValid}
         />
-        <Button className={classes.btn} fullWidth={true} variant="contained" color="primary" type="submit">
+        <Button className={classes.btn} fullWidth variant="contained" color="primary" type="submit">
           signup
         </Button>
       </form>
     );
   }
 }
-
-SignInForm.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
 
 export default withStyles(styles)(SignInForm);

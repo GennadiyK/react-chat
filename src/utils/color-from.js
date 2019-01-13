@@ -19,16 +19,16 @@ const colors = [
 
 export default function colorFrom(string) {
   try {
-      const index = string
-          .toString()
-          .split('')
-          .map(char => char.charCodeAt())
-          .reduce((sum, num) => sum + num, 0)
+    const index = string
+      .toString()
+      .split('')
+      .map(char => char.charCodeAt())
+      .reduce((sum, num) => sum + num, 0);
 
-      const colorIndex = index % colors.length
+    const colorIndex = index % colors.length;
 
-      return colors[colorIndex][500];
+    return colors[colorIndex][500];
   } catch (err) {
-     return blueGrey[500]
+    return blueGrey[500];
   }
 }

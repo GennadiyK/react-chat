@@ -1,29 +1,27 @@
-import React from 'react'
+import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 
-const styles = theme => ({
+const styles = () => ({
   joinChat: {
-    padding: '1rem'
+    padding: '1rem',
   },
 });
 
-const JoinChat = ({classes, onJoinButtonClick, disabled}) => {
-  return (
-    <Paper className={classes.joinChat}>
-      <Button
-        size="large"
-        color="primary"
-        variant="contained"
-        fullWidth={true}
-        onClick={onJoinButtonClick}
-        disabled={disabled}
-      >
+const JoinChat = ({ classes, onJoinButtonClick, disabled }) => (
+  <Paper className={classes.joinChat}>
+    <Button
+      size="large"
+      color="primary"
+      variant="contained"
+      fullWidth
+      onClick={onJoinButtonClick}
+      disabled={disabled}
+    >
         JOIN
-      </Button>
-    </Paper>
-  )
-};
+    </Button>
+  </Paper>
+);
 
 export default withStyles(styles)(JoinChat);

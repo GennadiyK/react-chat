@@ -1,3 +1,4 @@
-export function filterChats (chat, searchValue) {
-  return chat.filter((chat) => chat.title.toLowerCase().includes(searchValue))
+// eslint-disable-next-line
+export function filterChats(chats, searchValue) {
+  return chats.filter(chat => chat.title.toLowerCase().includes(searchValue));
 }
