@@ -1,5 +1,6 @@
 /* eslint no-underscore-dangle: 0 */
 import React from 'react';
+import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
@@ -123,5 +124,14 @@ to see your recent conversations.
     );
   }
 }
+MessageContainer.propTypes = {
+  classes: PropTypes.objectOf(PropTypes.string).isRequired,
+  messages: PropTypes.array.isRequired,
+  chats: PropTypes.object.isRequired,
+  activeUser: PropTypes.object.isRequired,
+  onJoinButtonClick: PropTypes.func.isRequired,
+  sendMessage: PropTypes.func.isRequired,
+  isConnected: PropTypes.bool.isRequired,
+};
 
 export default withStyles(styles)(MessageContainer);

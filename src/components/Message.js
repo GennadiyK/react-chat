@@ -1,5 +1,6 @@
 /* eslint no-underscore-dangle: 0 */
 import React from 'react';
+import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import moment from 'moment';
 import classNames from 'classnames';
@@ -81,5 +82,13 @@ function Message({
     </div>
   );
 }
+Message.propTypes = {
+  classes: PropTypes.objectOf(PropTypes.string).isRequired,
+  activeUser: PropTypes.object.isRequired,
+  sender: PropTypes.object.isRequired,
+  content: PropTypes.objectOf(PropTypes.string).isRequired,
+  statusMessage: PropTypes.objectOf(PropTypes.string).isRequired,
+  createdAt: PropTypes.string.isRequired,
+};
 
 export default withStyles(styles)(Message);

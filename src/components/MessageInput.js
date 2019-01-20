@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
@@ -31,6 +32,7 @@ class MessageInput extends React.Component {
 
   render() {
     const { classes, disabled } = this.props;
+    console.log(this.props);
     const { value } = this.state;
 
     return (
@@ -51,5 +53,14 @@ class MessageInput extends React.Component {
     );
   }
 }
+MessageInput.propTypes = {
+  classes: PropTypes.objectOf(PropTypes.string).isRequired,
+  disabled: PropTypes.bool,
+  sendMessage: PropTypes.func.isRequired,
+};
+
+MessageInput.defaultProps = {
+  disabled: null,
+};
 
 export default withStyles(styles)(MessageInput);

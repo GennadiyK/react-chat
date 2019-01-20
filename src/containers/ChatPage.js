@@ -22,7 +22,7 @@ const matStateToProps = (state) => {
   const activeChat = fromChats.getById(state.chats, state.chats.activeId) || null;
   const chatsMy = fromChats.getByIds(state.chats, state.chats.myIds);
   const chatsAll = fromChats.getByIds(state.chats, state.chats.allIds);
-  console.log('state.services.isConnected', state.services.isConnected);
+
   return {
     isAuthenticated: state.auth.isAuthenticated,
     chats: {

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
@@ -66,5 +67,10 @@ function MainMenu({ classes, showModal, disabled }) {
     </WithState>
   );
 }
+MainMenu.propTypes = {
+  classes: PropTypes.objectOf(PropTypes.string).isRequired,
+  showModal: PropTypes.func.isRequired,
+  disabled: PropTypes.bool.isRequired,
+};
 
 export default withStyles(styles)(MainMenu);

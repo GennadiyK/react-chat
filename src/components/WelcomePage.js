@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
@@ -68,5 +69,13 @@ class WelcomePage extends React.Component {
     );
   }
 }
+
+WelcomePage.propTypes = {
+  classes: PropTypes.objectOf(PropTypes.string).isRequired,
+  signup: PropTypes.func.isRequired,
+  login: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired,
+  error: PropTypes.instanceOf(Error).isRequired,
+};
 
 export default withStyles(styles)(WelcomePage);

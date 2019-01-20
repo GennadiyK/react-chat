@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import { Toolbar, TextField, Drawer } from '@material-ui/core/';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
@@ -219,5 +220,31 @@ class ChatPage extends React.Component {
     );
   }
 }
+ChatPage.propTypes = {
+  classes: PropTypes.objectOf(PropTypes.string).isRequired,
+  chats: PropTypes.object.isRequired,
+  logout: PropTypes.func.isRequired,
+  activeUser: PropTypes.object.isRequired,
+  sendMessage: PropTypes.func.isRequired,
+  setActiveChat: PropTypes.func.isRequired,
+  deleteChat: PropTypes.func.isRequired,
+  leaveChat: PropTypes.func.isRequired,
+  joinChat: PropTypes.func.isRequired,
+  searchChat: PropTypes.func.isRequired,
+  messages: PropTypes.array.isRequired,
+  error: PropTypes.object,
+  isConnected: PropTypes.bool.isRequired,
+  match: PropTypes.object.isRequired,
+  fetchAllChats: PropTypes.func.isRequired,
+  fetchMyChats: PropTypes.func.isRequired,
+  socketsConnect: PropTypes.func.isRequired,
+  mountChat: PropTypes.func.isRequired,
+  unmountChat: PropTypes.func.isRequired,
+  createChat: PropTypes.func.isRequired,
+};
+
+ChatPage.defaultProps = {
+  error: null,
+};
 
 export default withStyles(styles)(ChatPage);

@@ -1,5 +1,6 @@
 /* eslint no-underscore-dangle: 0 */
 import React from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
@@ -101,5 +102,13 @@ class ChatList extends React.Component {
     );
   }
 }
+
+ChatList.propTypes = {
+  classes: PropTypes.objectOf(PropTypes.string).isRequired,
+  chats: PropTypes.array.isRequired,
+  showCreateChatModal: PropTypes.func.isRequired,
+  disabled: PropTypes.bool.isRequired,
+  setActiveChat: PropTypes.func.isRequired,
+};
 
 export default withStyles(styles)(ChatList);

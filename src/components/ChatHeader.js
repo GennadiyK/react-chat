@@ -1,5 +1,6 @@
 /* eslint no-underscore-dangle: 0 */
 import React from 'react';
+import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Menu from '@material-ui/core/Menu';
@@ -115,5 +116,19 @@ class ChatHeader extends React.Component {
     );
   }
 }
+
+ChatHeader.propTypes = {
+  classes: PropTypes.objectOf(PropTypes.string).isRequired,
+  activeChat: PropTypes.object,
+  activeUser: PropTypes.object.isRequired,
+  isConnected: PropTypes.bool.isRequired,
+  showModal: PropTypes.func.isRequired,
+  deleteChat: PropTypes.func.isRequired,
+  leaveChat: PropTypes.func.isRequired,
+};
+
+ChatHeader.defaultProps = {
+  activeChat: null,
+};
 
 export default withStyles(styles)(ChatHeader);
