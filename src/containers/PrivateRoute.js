@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Route, Redirect, withRouter } from 'react-router-dom';
@@ -42,6 +43,11 @@ const mapDispatchToProps = dispatch => bindActionCreators(
   },
   dispatch,
 );
+
+PrivateRoute.propTypes = {
+  component: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired,
+};
 
 export default withRouter(
   connect(

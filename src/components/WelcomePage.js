@@ -75,7 +75,11 @@ WelcomePage.propTypes = {
   signup: PropTypes.func.isRequired,
   login: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
-  error: PropTypes.instanceOf(Error).isRequired,
+  error: PropTypes.instanceOf(Error),
+};
+
+WelcomePage.defaultProps = {
+  error: null,
 };
 
 export default withStyles(styles)(WelcomePage);

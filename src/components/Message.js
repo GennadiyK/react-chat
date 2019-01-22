@@ -37,7 +37,7 @@ const styles = () => ({
 });
 
 function Message({
-  classes, sender, content, statusMessage, createdAt, activeUser,
+  classes, sender, content, statusMessage = null, createdAt, activeUser,
 }) {
   if (statusMessage) {
     return (
@@ -86,9 +86,13 @@ Message.propTypes = {
   classes: PropTypes.objectOf(PropTypes.string).isRequired,
   activeUser: PropTypes.object.isRequired,
   sender: PropTypes.object.isRequired,
-  content: PropTypes.objectOf(PropTypes.string).isRequired,
-  statusMessage: PropTypes.objectOf(PropTypes.string).isRequired,
+  content: PropTypes.string.isRequired,
+  statusMessage: PropTypes.bool,
   createdAt: PropTypes.string.isRequired,
+};
+
+Message.defaultProps = {
+  statusMessage: null,
 };
 
 export default withStyles(styles)(Message);

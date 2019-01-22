@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 
@@ -37,5 +38,10 @@ class SearchField extends React.Component {
     );
   }
 }
+
+SearchField.propTypes = {
+  classes: PropTypes.objectOf(PropTypes.string).isRequired,
+  searchChat: PropTypes.func.isRequired,
+};
 
 export default withStyles(styles)(SearchField);

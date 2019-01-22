@@ -32,7 +32,6 @@ class MessageInput extends React.Component {
 
   render() {
     const { classes, disabled } = this.props;
-    console.log(this.props);
     const { value } = this.state;
 
     return (
