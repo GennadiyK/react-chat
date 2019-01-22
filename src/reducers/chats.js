@@ -56,6 +56,7 @@ const myIds = (state = initialState.myIds, action) => {
   }
 };
 const byIds = (state = initialState.byIds, action) => {
+  let newState;
   switch (action.type) {
     case types.FETCH_ALL_CHATS_SUCCESS:
     case types.FETCH_MY_CHATS_SUCCESS:
@@ -79,18 +80,9 @@ const byIds = (state = initialState.byIds, action) => {
       };
     case types.DELETE_CHAT_SUCCESS:
     case types.RECEIVE_DELETED_CHAT:
-      // const newState = { ...state };
-      // delete newState[getChatId(action.payload.chat)];
-      // return newState;
-      return Object.assign({}, state, {
-        [getChatId(action.payload.chat)]: Object.keys(state.c).reduce((result, key) => {
-          const r = result;
-          if (key !== 'y') {
-            r[key] = state.c[key];
-          }
-          return r;
-        }, {}),
-      });
+      newState = { ...state };
+      delete newState[getChatId(action.payload.chat)];
+      return newState;
     default:
       return state;
   }
