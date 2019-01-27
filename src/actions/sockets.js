@@ -2,6 +2,7 @@
 import SocketIOClient from 'socket.io-client';
 import * as types from '../constants';
 import { redirect } from './services';
+import config from '../config';
 
 export function missingSocketConnection() {
   return {
@@ -25,7 +26,7 @@ export function socketsConnect() {
       type: types.SOCKET_CONNECTION_REQUEST,
     });
 
-    socket = SocketIOClient(`ws://${process.env.REACT_APP_URL}`, {
+    socket = SocketIOClient(`${config.SOCKETS_URI}`, {
       query: { token },
     });
 
