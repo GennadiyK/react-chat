@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -8,12 +9,8 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 class Modal extends React.Component {
   render() {
     const {
-      isOpen,
-      title,
-      handleClose,
-      handleConfirm
+      isOpen, title, handleClose, handleConfirm, children,
     } = this.props;
-
     return (
       <div>
         <Dialog
@@ -23,9 +20,7 @@ class Modal extends React.Component {
           aria-describedby="alert-dialog-description"
         >
           <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
-          <DialogContent>
-            { this.props.children }
-          </DialogContent>
+          <DialogContent>{children}</DialogContent>
           <DialogActions>
             <Button onClick={handleClose} color="primary">
               no
@@ -39,5 +34,12 @@ class Modal extends React.Component {
     );
   }
 }
+Modal.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  title: PropTypes.string.isRequired,
+  handleClose: PropTypes.func.isRequired,
+  handleConfirm: PropTypes.func.isRequired,
+  children: PropTypes.element.isRequired,
+};
 
 export default Modal;

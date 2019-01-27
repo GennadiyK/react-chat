@@ -1,44 +1,41 @@
-import React from 'react'
-import { withStyles } from '@material-ui/core/styles';
+import React from 'react';
 import PropTypes from 'prop-types';
-import TextField from "@material-ui/core/TextField";
+import { withStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 
-const styles = theme => ({
+const styles = () => ({
   textFieldPaper: {
-    padding: '1rem'
+    padding: '1rem',
   },
 });
 
-
 class MessageInput extends React.Component {
   state = {
-    value: ''
+    value: '',
   };
 
   handleValueChange = (e) => {
-    this.setState({value: e.target.value})
+    this.setState({ value: e.target.value });
   };
 
   handleSendMessage = (e) => {
     const { value } = this.state;
-
+    const { sendMessage } = this.props;
     if (e.key === 'Enter' && value) {
-      this.props.sendMessage(value);
+      sendMessage(value);
       this.setState({
-        value: ''
+        value: '',
       });
     }
   };
 
   render() {
-    const {
-      classes,
-      disabled,
-    } = this.props;
+    const { classes, disabled } = this.props;
+    const { value } = this.state;
 
     return (
-      <Paper  elevation={3} className={classes.textFieldPaper}>
+      <Paper elevation={3} className={classes.textFieldPaper}>
         <TextField
           placeholder="Type your message..."
           fullWidth
@@ -46,18 +43,23 @@ class MessageInput extends React.Component {
           InputLabelProps={{
             shrink: true,
           }}
-          value={this.state.value}
+          value={value}
           onChange={this.handleValueChange}
           onKeyPress={this.handleSendMessage}
           disabled={disabled}
         />
       </Paper>
-    )
+    );
   }
 }
-
 MessageInput.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.objectOf(PropTypes.string).isRequired,
+  disabled: PropTypes.bool,
+  sendMessage: PropTypes.func.isRequired,
+};
+
+MessageInput.defaultProps = {
+  disabled: null,
 };
 
 export default withStyles(styles)(MessageInput);

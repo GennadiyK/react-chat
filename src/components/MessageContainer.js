@@ -1,10 +1,11 @@
-import React from 'react'
-import { withStyles } from '@material-ui/core/styles';
+/* eslint no-underscore-dangle: 0 */
+import React from 'react';
 import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
-import Message from "./Message";
-import MessageInput from "./MessageInput";
+import Message from './Message';
+import MessageInput from './MessageInput';
 import JoinChat from './joinChat';
 
 const styles = theme => ({
@@ -14,7 +15,7 @@ const styles = theme => ({
     height: '100%',
     overflow: 'auto',
     paddingTop: '24px',
-    paddingBottom: '179px'
+    paddingBottom: '179px',
   },
   'appBar-left': {
     marginLeft: '320px',
@@ -42,10 +43,9 @@ const styles = theme => ({
     position: 'fixed',
   },
   textFieldPaper: {
-    padding: '16px'
+    padding: '16px',
   },
 });
-
 
 class MessageContainer extends React.Component {
   componentDidMount() {
@@ -56,11 +56,11 @@ class MessageContainer extends React.Component {
     this.fixScrollBottom();
   }
 
-  fixScrollBottom () {
+  fixScrollBottom() {
     if (this.chatWrapRef) {
       this.chatWrapRef.scrollTop = this.chatWrapRef.scrollHeight;
     }
-  };
+  }
 
   render() {
     const {
@@ -75,43 +75,63 @@ class MessageContainer extends React.Component {
 
     return (
       <main className={classes.content}>
-        {!chats.active && <Paper className={classes.paper} elevation={1}>
-          <Typography variant="display1" component="h3" gutterBottom={true}>
-            Start messaging…
-          </Typography>
-          <Typography component="p" gutterBottom={true}>
-            Use <strong>Global</strong> to explore communities around here.
-          </Typography>
-          <Typography component="p" gutterBottom={true}>
-            Use <strong>Recents</strong> to see your recent conversations.
-          </Typography>
-        </Paper>
-        }
-        {
-          Boolean(messages.length)
-          && Boolean(chats.active)
-          && <div className={classes.chatMessageWrap} ref={(el) => this.chatWrapRef = el}>
-            {messages.map((message, index) => {
-                return <Message key={index} {...message} activeUser={activeUser}/>
-            }
+        {!chats.active && (
+          <Paper className={classes.paper} elevation={1}>
+            <Typography variant="display1" component="h3" gutterBottom>
+              Start messaging…
+            </Typography>
+            <Typography component="p" gutterBottom>
+              Use
+              {' '}
+              <strong>Global</strong>
+              {' '}
+to explore communities around here.
+            </Typography>
+            <Typography component="p" gutterBottom>
+              Use
+              {' '}
+              <strong>Recents</strong>
+              {' '}
+to see your recent conversations.
+            </Typography>
+          </Paper>
+        )}
+        {Boolean(messages.length) && Boolean(chats.active) && (
+          <div
+            className={classes.chatMessageWrap}
+            ref={(el) => {
+              this.chatWrapRef = el;
+            }}
+          >
+            {messages.map(message => (
+              <Message key={message._id} {...message} activeUser={activeUser} />
+            ))}
+          </div>
+        )}
+        {chats.active && (
+          <div className={classes.textFieldWrap}>
+            {activeUser.isChatMember ? (
+              <MessageInput sendMessage={sendMessage} desabled={!isConnected} />
+            ) : (
+              <JoinChat
+                disabled={!isConnected}
+                onJoinButtonClick={() => onJoinButtonClick(chats.active._id)}
+              />
             )}
           </div>
-        }
-        {
-          chats.active && <div className={classes.textFieldWrap}>
-            {activeUser.isChatMember ?
-              <MessageInput sendMessage={sendMessage} desabled={!isConnected}/> :
-              <JoinChat disabled={!isConnected} onJoinButtonClick={() => onJoinButtonClick(chats.active._id)}/>
-            }
-          </div>
-        }
+        )}
       </main>
-    )
+    );
   }
 }
-
 MessageContainer.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.objectOf(PropTypes.string).isRequired,
+  messages: PropTypes.array.isRequired,
+  chats: PropTypes.object.isRequired,
+  activeUser: PropTypes.object.isRequired,
+  onJoinButtonClick: PropTypes.func.isRequired,
+  sendMessage: PropTypes.func.isRequired,
+  isConnected: PropTypes.bool.isRequired,
 };
 
 export default withStyles(styles)(MessageContainer);

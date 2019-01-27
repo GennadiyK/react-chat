@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
@@ -13,15 +14,16 @@ class ErrorMessage extends React.Component {
   };
 
   componentWillReceiveProps = (nextProps) => {
-    if(nextProps.error) {
-      this.setState({ open: true})
+    if (nextProps.error) {
+      this.setState({ open: true });
     }
   };
 
   render() {
     const { error } = this.props;
+    const { open } = this.state;
 
-    if(!error) {
+    if (!error) {
       return null;
     }
 
@@ -32,7 +34,7 @@ class ErrorMessage extends React.Component {
             vertical: 'bottom',
             horizontal: 'left',
           }}
-          open={this.state.open}
+          open={open}
           autoHideDuration={6000}
           onClose={this.handleClose}
           message={<span>{error.message}</span>}
@@ -51,5 +53,12 @@ class ErrorMessage extends React.Component {
     );
   }
 }
+ErrorMessage.propTypes = {
+  error: PropTypes.object,
+};
+
+ErrorMessage.defaultProps = {
+  error: null,
+};
 
 export default ErrorMessage;

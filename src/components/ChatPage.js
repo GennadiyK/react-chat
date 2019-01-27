@@ -1,19 +1,19 @@
-import React from 'react'
-import { withStyles } from '@material-ui/core/styles';
+import React from 'react';
 import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
 import { Toolbar, TextField, Drawer } from '@material-ui/core/';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import RestoreIcon from '@material-ui/icons/Restore';
 import ExploreIcon from '@material-ui/icons/Explore';
-import ChatList from "./ChatList";
-import SearchField from "./SearchField";
-import ChatHeader from "./ChatHeader";
-import MessageContainer from "./MessageContainer";
-import Modal from "./Modal";
-import  ErrorMessage from './ErrorMessage'
+import ChatList from './ChatList';
+import SearchField from './SearchField';
+import ChatHeader from './ChatHeader';
+import MessageContainer from './MessageContainer';
+import Modal from './Modal';
+import ErrorMessage from './ErrorMessage';
 
-const styles = theme => ({
+const styles = () => ({
   root: {
     flexGrow: 1,
   },
@@ -39,7 +39,6 @@ const styles = theme => ({
   },
 });
 
-
 class ChatPage extends React.Component {
   state = {
     confirmModalOpen: false,
@@ -50,33 +49,31 @@ class ChatPage extends React.Component {
 
   componentDidMount() {
     const {
-      match,
-      fetchAllChats,
-      fetchMyChats,
-      socketsConnect,
-      mountChat,
+      match, fetchAllChats, fetchMyChats, socketsConnect, mountChat,
     } = this.props;
 
-    Promise.all([
-      fetchAllChats(),
-      fetchMyChats(),
-    ]).then(() => {
-      socketsConnect();
-    }).then(() => {
-      const { chatId } = match.params;
+    Promise.all([fetchAllChats(), fetchMyChats()])
+      .then(() => {
+        socketsConnect();
+      })
+      .then(() => {
+        const { chatId } = match.params;
 
-      if( chatId ) {
-        mountChat(chatId);
-      }
-
-    });
+        if (chatId) {
+          mountChat(chatId);
+        }
+      });
   }
 
   componentWillReceiveProps(nextProps) {
-    const { match: {params}, unmountChat, mountChat } = this.props;
-    const {params: nextParams} = nextProps.match;
+    const {
+      match: { params },
+      unmountChat,
+      mountChat,
+    } = this.props;
+    const { params: nextParams } = nextProps.match;
 
-    if(nextParams.chatId && params.chatId !==  nextParams.chatId) {
+    if (nextParams.chatId && params.chatId !== nextParams.chatId) {
       unmountChat(params.chatId);
       mountChat(nextParams.chatId);
     }
@@ -100,18 +97,20 @@ class ChatPage extends React.Component {
 
   handleChangeNewChatField = (event) => {
     this.setState({
-      chatName: event.target.value
-    })
-  }
+      chatName: event.target.value,
+    });
+  };
 
   handleCreateChat = () => {
-    this.props.createChat({
-      data:{
-        title: this.state.chatName
-      }
-    })
+    const { createChat } = this.props;
+    const { chatName } = this.state;
+    createChat({
+      data: {
+        title: chatName,
+      },
+    });
 
-    this.handleCloseCreateChatModal()
+    this.handleCloseCreateChatModal();
   };
 
   handleChange = (event, value) => {
@@ -137,7 +136,7 @@ class ChatPage extends React.Component {
       isConnected,
     } = this.props;
 
-    const { activeTab } = this.state;
+    const { activeTab, createChatModalOpen, confirmModalOpen } = this.state;
     return (
       <div className={classes.root}>
         <div className={classes.appFrame}>
@@ -157,7 +156,7 @@ class ChatPage extends React.Component {
             anchor="left"
           >
             <Toolbar className={classes.asideToolbar}>
-              <SearchField searchChat={searchChat}/>
+              <SearchField searchChat={searchChat} />
             </Toolbar>
             <ChatList
               chats={activeTab === 0 ? chats.my : chats.all}
@@ -171,8 +170,16 @@ class ChatPage extends React.Component {
               showLabels
               className={classes.root}
             >
-              <BottomNavigationAction label="My chats" icon={<RestoreIcon />} disabled={!isConnected}/>
-              <BottomNavigationAction label="Explore" icon={<ExploreIcon />} disabled={!isConnected}/>
+              <BottomNavigationAction
+                label="My chats"
+                icon={<RestoreIcon />}
+                disabled={!isConnected}
+              />
+              <BottomNavigationAction
+                label="Explore"
+                icon={<ExploreIcon />}
+                disabled={!isConnected}
+              />
             </BottomNavigation>
           </Drawer>
           <MessageContainer
@@ -184,10 +191,10 @@ class ChatPage extends React.Component {
             isConnected={isConnected}
           />
           <Modal
-            isOpen={this.state.createChatModalOpen}
+            isOpen={createChatModalOpen}
             handleClose={this.handleCloseCreateChatModal}
             handleConfirm={this.handleCreateChat}
-            title={'Create new chat'}
+            title="Create new chat"
           >
             <TextField
               id="standard-textarea"
@@ -200,23 +207,44 @@ class ChatPage extends React.Component {
             />
           </Modal>
           <Modal
-            isOpen={this.state.confirmModalOpen}
+            isOpen={confirmModalOpen}
             handleClose={this.handleCloseConfirmModal}
             handleConfirm={logout}
-            title={'Confirm logout'}
+            title="Confirm logout"
           >
             <p>Do you want to logout?</p>
           </Modal>
         </div>
-        <ErrorMessage error={error}/>
+        <ErrorMessage error={error} />
       </div>
-
-    )
+    );
   }
 }
-
 ChatPage.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.objectOf(PropTypes.string).isRequired,
+  chats: PropTypes.object.isRequired,
+  logout: PropTypes.func.isRequired,
+  activeUser: PropTypes.object.isRequired,
+  sendMessage: PropTypes.func.isRequired,
+  setActiveChat: PropTypes.func.isRequired,
+  deleteChat: PropTypes.func.isRequired,
+  leaveChat: PropTypes.func.isRequired,
+  joinChat: PropTypes.func.isRequired,
+  searchChat: PropTypes.func.isRequired,
+  messages: PropTypes.array.isRequired,
+  error: PropTypes.object,
+  isConnected: PropTypes.bool.isRequired,
+  match: PropTypes.object.isRequired,
+  fetchAllChats: PropTypes.func.isRequired,
+  fetchMyChats: PropTypes.func.isRequired,
+  socketsConnect: PropTypes.func.isRequired,
+  mountChat: PropTypes.func.isRequired,
+  unmountChat: PropTypes.func.isRequired,
+  createChat: PropTypes.func.isRequired,
+};
+
+ChatPage.defaultProps = {
+  error: null,
 };
 
 export default withStyles(styles)(ChatPage);

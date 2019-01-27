@@ -1,80 +1,80 @@
-import * as types from '../constants/auth'
+import * as types from '../constants/auth';
 import callApi from '../utils/call-api';
 
-export function signup (username, password) {
+export function signup(username, password) {
   return (dispatch, getState) => {
     const { isFetching } = getState().services;
 
-    if(isFetching.signUp) {
+    if (isFetching.signUp) {
       return Promise.resolve();
     }
 
     dispatch({
-      type: types.SIGNUP_REQUEST
+      type: types.SIGNUP_REQUEST,
     });
 
-    return callApi('signup',undefined, {method: 'POST'},{username,password})
-    .then((json) => {
-      if(!json.token) {
-        throw new Error('Token has not been provided');
-      }
-      localStorage.setItem('token', json.token);
-      dispatch({
-        type: types.SIGNUP_SUCCESS,
-        payload: json
+    return callApi('signup', undefined, { method: 'POST' }, { username, password })
+      .then((json) => {
+        if (!json.token) {
+          throw new Error('Token has not been provided');
+        }
+        localStorage.setItem('token', json.token);
+        dispatch({
+          type: types.SIGNUP_SUCCESS,
+          payload: json,
+        });
       })
-    })
-    .catch((err) => {
-      dispatch({
-        type: types.SIGNUP_FAILURE,
-        payload: err
-      })
-    });
-  }
+      .catch((err) => {
+        dispatch({
+          type: types.SIGNUP_FAILURE,
+          payload: err,
+        });
+      });
+  };
 }
 
-export function login (username, password) {
+export function login(username, password) {
   return (dispatch, getState) => {
     const { isFetching } = getState().services;
 
-    if(isFetching.login) {
+    if (isFetching.login) {
       return Promise.resolve();
     }
 
     dispatch({
-      type: types.LOGIN_REQUEST
+      type: types.LOGIN_REQUEST,
     });
 
-    return callApi('login',undefined, {method: 'POST'},{username, password})
+    return callApi('login', undefined, { method: 'POST' }, { username, password })
       .then((json) => {
-        if(!json.token) {
+        if (!json.token) {
           throw new Error('Token has not been provided');
         }
         localStorage.setItem('token', json.token);
         dispatch({
           type: types.LOGIN_SUCCESS,
-          payload: json
-        })
+          payload: json,
+        });
       })
       .catch((err) => {
         dispatch({
           type: types.LOGIN_FAILURE,
-          payload: err
-        })
+          payload: err,
+        });
       });
-  }
+  };
 }
 
-export function logout () {
+export function logout() {
   return (dispatch, getState) => {
     const { isFetching } = getState().services;
 
-    if(isFetching.logout) {
+    if (isFetching.logout) {
       return Promise.resolve();
     }
 
     dispatch({
-      type: types.LOGOUT_REQUEST
+      type: types.LOGOUT_REQUEST,
     });
 
     return callApi('logout')
@@ -83,23 +83,23 @@ export function logout () {
 
         dispatch({
           type: types.LOGOUT_SUCCESS,
-          payload: json
-        })
+          payload: json,
+        });
       })
       .catch((err) => {
         dispatch({
           type: types.LOGOUT_FAILURE,
-          payload: err
-        })
-      })
-  }
+          payload: err,
+        });
+      });
+  };
 }
 
-export function receiveAuth () {
+export function receiveAuth() {
   return (dispatch, getState) => {
     const { isFetching } = getState().services;
 
-    if(isFetching.receiveAuth) {
+    if (isFetching.receiveAuth) {
       return Promise.resolve();
     }
 
@@ -109,24 +109,24 @@ export function receiveAuth () {
       type: types.RECEIVE_AUTH_REQUEST,
     });
 
-    if(!token) {
+    if (!token) {
       dispatch({
-        type: types.RECEIVE_AUTH_FAILURE
-      })
+        type: types.RECEIVE_AUTH_FAILURE,
+      });
     }
 
     return callApi('users/me', token)
       .then((json) => {
         dispatch({
           type: types.RECEIVE_AUTH_SUCCESS,
-          payload: json
-        })
+          payload: json,
+        });
       })
       .catch((err) => {
         dispatch({
           type: types.RECEIVE_AUTH_FAILURE,
-          payload: err
-        })
+          payload: err,
+        });
       });
-  }
+  };
 }

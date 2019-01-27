@@ -3,14 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
-require('dotenv').config()
 
 const rootEl = document.getElementById('root');
 ReactDOM.render(<App />, rootEl);
 
-if(module.hot) {
+if (module.hot) {
   module.hot.accept('./App', () => {
     ReactDOM.render(<App />, rootEl);
-  })
+  });
 }
 registerServiceWorker();

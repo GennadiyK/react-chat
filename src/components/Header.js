@@ -1,9 +1,9 @@
-import React from 'react'
-import { withStyles } from '@material-ui/core/styles';
+import React from 'react';
 import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography'
+import Typography from '@material-ui/core/Typography';
 
 const styles = {
   root: {
@@ -11,7 +11,7 @@ const styles = {
   },
 };
 
-const Header = ({classes}) => (
+const Header = ({ classes }) => (
   <div className={classes.root}>
     <AppBar position="static">
       <Toolbar>
@@ -22,9 +22,8 @@ const Header = ({classes}) => (
     </AppBar>
   </div>
 );
-
 Header.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.objectOf(PropTypes.string).isRequired,
 };
 
 export default withStyles(styles)(Header);
