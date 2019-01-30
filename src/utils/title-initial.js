@@ -4,10 +4,9 @@ export default function titleInitials(title) {
       .trim()
       .split(' ')
       .map((word) => {
-        if (word.length === 0) {
-          return '...';
+        if (word) {
+          return word[0].toUpperCase();
         }
-        return word[0].toUpperCase();
       })
       .slice(0, 2)
       .join('');
