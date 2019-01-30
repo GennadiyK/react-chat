@@ -34,8 +34,7 @@
     "eject": "react-app-rewired eject",
     "lint": "eslint \"src/**/*.js\"",
     "lint:fix": "npm run lint -- --fix",
-    "format": "prettier-eslint --write \"**/*.{js,json}\"",
-    "precommit": "lint-staged"
+    "format": "prettier-eslint --write \"**/*.{js,json}\""
   },
   "devDependencies": {
     "customize-cra": "^0.2.9",
